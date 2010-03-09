@@ -127,6 +127,9 @@ void outletObjectAwoke(id sender);
 - (IBAction)setStickyYellow:(id)sender;
 - (IBAction)moveStickiesToTop:(id)sender;
 - (IBAction)moveStickiesToBottom:(id) sender;
+- (IBAction)stackWindowsInCurrentOrder:(id) sender;
+- (IBAction)minimizeAllStickies: (id) sender;
+- (IBAction)maximizeAllStickies: (id) sender;
 - (void) updateStickyMenus;
 - (void) updateStickyStates;
 

@@ -25,5 +25,6 @@
 - (BOOL)isAnyBodyAtThisPosition:(AutoMoveWindow *) window;
 - (void) moveAllToTop;
 - (void) moveAllToBottom;
+- (void) stackWindowsInCurrentOrder;
 
 @end

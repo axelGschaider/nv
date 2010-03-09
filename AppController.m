@@ -1824,4 +1824,17 @@ terminateApp:
 	[stickyCentral moveAllToBottom];
 }
 
+- (IBAction)stackWindowsInCurrentOrder:(id) sender {
+	[stickyCentral stackWindowsInCurrentOrder];
+}
+
+- (IBAction)minimizeAllStickies: (id) sender {
+	[stickyCentral minimizeAll];
+}
+
+
+- (IBAction)maximizeAllStickies: (id) sender {
+	[stickyCentral maximizeAll];
+}
+
 @end

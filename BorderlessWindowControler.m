@@ -296,4 +296,8 @@
 	
 }
 
+- (BOOL) isMinimized {
+	return [daWindow isMimimized];
+}
+
 @end

@@ -266,6 +266,35 @@
 	
 }
 
+- (void) minimizeAll {
+	NSEnumerator * enu = [stickies objectEnumerator];
+	
+	StickyObject * sticky = nil;
+	
+	while ((sticky = [enu nextObject])) {
+		
+		if (![[sticky controler] isMinimized]) {
+			[[sticky controler] minimizeToggle:self];
+		}
+		
+	}
+	
+}
+
+- (void) maximizeAll {
+	NSEnumerator * enu = [stickies objectEnumerator];
+	
+	StickyObject * sticky = nil;
+	
+	while ((sticky = [enu nextObject])) {
+		
+		if ([[sticky controler] isMinimized]) {
+			[[sticky controler] minimizeToggle:self];
+		}
+		
+	}
+}
+
 
 
 @end

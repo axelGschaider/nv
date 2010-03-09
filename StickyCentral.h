@@ -46,6 +46,8 @@
 - (NSMutableArray*) focusWindows;
 - (BOOL) isRegisteredAsFocusWindow: (StickyControler *) controler;
 - (void) updateTitleForNode: (NoteObject *)note;
+- (void) minimizeAll;
+- (void) maximizeAll;
 //- (int) focusWindowIndex: (StickyControler *) controler;
 
 

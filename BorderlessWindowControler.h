@@ -37,6 +37,7 @@
 	
 }
 
+- (BOOL) isMinimized;
 - (void) setWindowTitle:(NSString*) theTitle;
 - (IBAction)minimizeToggle: (id) sender;
 - (IBAction)closeWindow: (id) sender;

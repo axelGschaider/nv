@@ -427,5 +427,105 @@
 	
 }
 
+- (void) stackWindowsInCurrentOrder {
+	
+	int count = [windows count];
+	
+	if (count == 0) {
+		return;
+	}
+	
+	NSRect screen = [[windows objectAtIndex:0] getUsableScreen];
+	
+	int daIndex = 0;
+	
+	
+	int maxY = screen.origin.y + screen.size.height;
+	int minY = screen.origin.y;
+	int maxX = screen.origin.x + screen.size.width;
+	int minX = screen.origin.x;
+	
+	int xStart = minX;
+	int currentLeftX = xStart;
+	int currentUpperY = maxY;
+	
+	while (daIndex < count) {
+		AutoMoveWindow * win = [windows objectAtIndex:daIndex];
+		daIndex++;
+		
+		NSRect frame = [win frame];
+		
+		if ( currentUpperY - frame.size.height < minY ||
+			 currentLeftX + frame.size.width > maxX) {
+			
+			xStart = xStart + 15;
+			currentLeftX = xStart;
+			currentUpperY = maxY;
+			
+		}
+		
+		frame.origin.x = currentLeftX;
+		frame.origin.y = currentUpperY - frame.size.height;
+		
+		[win setFrameNoCall:frame display:YES animate:YES];
+		
+		currentLeftX += 15;
+		currentUpperY -= 15;
+		
+	}
+	
+	
+}
+
+/*- (void) orderAccordingToColor {
+	
+	NSMutableArray * ordereredWindows = [[NSMutableArray alloc] init];
+	
+	NSEnumerator * enu = [windows objectEnumerator];
+	
+	AutoMoveWindow * sticky = nil;
+	
+	while ((sticky = [enu nextObject])) {
+		if ([[sticky controler] isYellow]) {
+			[ordereredWindows insertObject:sticky atIndex:0];
+		}
+	}
+	
+	while ((sticky = [enu nextObject])) {
+		if ([[sticky controler] isViolet]) {
+			[ordereredWindows insertObject:sticky atIndex:0];
+		}
+	}
+	
+	while ((sticky = [enu nextObject])) {
+		if ([[sticky controler] isPink]) {
+			[ordereredWindows insertObject:sticky atIndex:0];
+		}
+	}
+	
+	while ((sticky = [enu nextObject])) {
+		if ([[sticky controler] isGrey]) {
+			[ordereredWindows insertObject:sticky atIndex:0];
+		}
+	}
+	
+	while ((sticky = [enu nextObject])) {
+		if ([[sticky controler] isGreen]) {
+			[ordereredWindows insertObject:sticky atIndex:0];
+		}
+	}
+	
+	while ((sticky = [enu nextObject])) {
+		if ([[sticky controler] isBlue]) {
+			[ordereredWindows insertObject:sticky atIndex:0];
+		}
+	}
+	
+	[windows release];
+	
+	windows = ordereredWindows;
+	
+} */
+
 
 @end
