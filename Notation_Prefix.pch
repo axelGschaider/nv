@@ -72,3 +72,6 @@ typedef unsigned int NSUInteger;
 #define IsSnowLeopardOrLater (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber10_6)
 
 #define NOTES_MENU_ID 89
+
+//AXELS CODE
+#define STICKY_MENU_ID 1112

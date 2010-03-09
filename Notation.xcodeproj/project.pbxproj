@@ -156,6 +156,17 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D3EECA00106F66C70023D7F8 /* NVPasswordGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EEC9FE106F66C70023D7F8 /* NVPasswordGenerator.m */; };
+		ECD5923011467E9A00EA01DE /* AutoMoveCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */; };
+		ECD5923111467E9A00EA01DE /* AutoMoveWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5921F11467E9A00EA01DE /* AutoMoveWindow.m */; };
+		ECD5923211467E9A00EA01DE /* BorderlessView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922111467E9A00EA01DE /* BorderlessView.m */; };
+		ECD5923311467E9A00EA01DE /* BorderlessWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922311467E9A00EA01DE /* BorderlessWindow.m */; };
+		ECD5923411467E9A00EA01DE /* BorderlessWindowControler.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922511467E9A00EA01DE /* BorderlessWindowControler.m */; };
+		ECD5923511467E9A00EA01DE /* ButtonForBorderless.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922711467E9A00EA01DE /* ButtonForBorderless.m */; };
+		ECD5923611467E9A00EA01DE /* StickyCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922911467E9A00EA01DE /* StickyCentral.m */; };
+		ECD5923711467E9A00EA01DE /* StickyControler.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922B11467E9A00EA01DE /* StickyControler.m */; };
+		ECD5923811467E9A00EA01DE /* StickyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922D11467E9A00EA01DE /* StickyObject.m */; };
+		ECD5923911467E9A00EA01DE /* TextViewForBorderless.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922F11467E9A00EA01DE /* TextViewForBorderless.m */; };
+		ECD592701146802300EA01DE /* StickyWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECD5926F1146802300EA01DE /* StickyWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -425,6 +436,27 @@
 		8D1107320486CEB800E47090 /* Notational Velocity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notational Velocity.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3EEC9FE106F66C70023D7F8 /* NVPasswordGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVPasswordGenerator.m; sourceTree = "<group>"; };
 		D3EEC9FF106F66C70023D7F8 /* NVPasswordGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVPasswordGenerator.h; sourceTree = "<group>"; };
+		ECD5921C11467E9A00EA01DE /* AutoMoveCentral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMoveCentral.h; sourceTree = "<group>"; };
+		ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoMoveCentral.m; sourceTree = "<group>"; };
+		ECD5921E11467E9A00EA01DE /* AutoMoveWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMoveWindow.h; sourceTree = "<group>"; };
+		ECD5921F11467E9A00EA01DE /* AutoMoveWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoMoveWindow.m; sourceTree = "<group>"; };
+		ECD5922011467E9A00EA01DE /* BorderlessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderlessView.h; sourceTree = "<group>"; };
+		ECD5922111467E9A00EA01DE /* BorderlessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderlessView.m; sourceTree = "<group>"; };
+		ECD5922211467E9A00EA01DE /* BorderlessWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderlessWindow.h; sourceTree = "<group>"; };
+		ECD5922311467E9A00EA01DE /* BorderlessWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderlessWindow.m; sourceTree = "<group>"; };
+		ECD5922411467E9A00EA01DE /* BorderlessWindowControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderlessWindowControler.h; sourceTree = "<group>"; };
+		ECD5922511467E9A00EA01DE /* BorderlessWindowControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderlessWindowControler.m; sourceTree = "<group>"; };
+		ECD5922611467E9A00EA01DE /* ButtonForBorderless.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonForBorderless.h; sourceTree = "<group>"; };
+		ECD5922711467E9A00EA01DE /* ButtonForBorderless.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonForBorderless.m; sourceTree = "<group>"; };
+		ECD5922811467E9A00EA01DE /* StickyCentral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyCentral.h; sourceTree = "<group>"; };
+		ECD5922911467E9A00EA01DE /* StickyCentral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyCentral.m; sourceTree = "<group>"; };
+		ECD5922A11467E9A00EA01DE /* StickyControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyControler.h; sourceTree = "<group>"; };
+		ECD5922B11467E9A00EA01DE /* StickyControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyControler.m; sourceTree = "<group>"; };
+		ECD5922C11467E9A00EA01DE /* StickyObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyObject.h; sourceTree = "<group>"; };
+		ECD5922D11467E9A00EA01DE /* StickyObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyObject.m; sourceTree = "<group>"; };
+		ECD5922E11467E9A00EA01DE /* TextViewForBorderless.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewForBorderless.h; sourceTree = "<group>"; };
+		ECD5922F11467E9A00EA01DE /* TextViewForBorderless.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewForBorderless.m; sourceTree = "<group>"; };
+		ECD5926F1146802300EA01DE /* StickyWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StickyWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -504,6 +536,7 @@
 				D3EEC9FE106F66C70023D7F8 /* NVPasswordGenerator.m */,
 				21B1BC341104D20E0004A7D0 /* InvocationRecorder.h */,
 				21B1BC351104D20E0004A7D0 /* InvocationRecorder.m */,
+				ECD5923D11467EC100EA01DE /* Sticky Classes */,
 				21F0793710EC5E21004FE56F /* Sync Services */,
 				212089CF0B0C2BCF00A15A69 /* Note Importing */,
 			);
@@ -801,6 +834,7 @@
 				21813561105AF27400A0AE18 /* Acknowledgments.txt */,
 				217DB1810B7CE5B9008CD564 /* Help Notes */,
 				219196B109D4F1DB00586B15 /* Images */,
+				ECD5926F1146802300EA01DE /* StickyWindow.xib */,
 				2114C259095885C800614E74 /* Localizable.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -832,6 +866,33 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECD5923D11467EC100EA01DE /* Sticky Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ECD5921C11467E9A00EA01DE /* AutoMoveCentral.h */,
+				ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */,
+				ECD5921E11467E9A00EA01DE /* AutoMoveWindow.h */,
+				ECD5921F11467E9A00EA01DE /* AutoMoveWindow.m */,
+				ECD5922011467E9A00EA01DE /* BorderlessView.h */,
+				ECD5922111467E9A00EA01DE /* BorderlessView.m */,
+				ECD5922211467E9A00EA01DE /* BorderlessWindow.h */,
+				ECD5922311467E9A00EA01DE /* BorderlessWindow.m */,
+				ECD5922411467E9A00EA01DE /* BorderlessWindowControler.h */,
+				ECD5922511467E9A00EA01DE /* BorderlessWindowControler.m */,
+				ECD5922611467E9A00EA01DE /* ButtonForBorderless.h */,
+				ECD5922711467E9A00EA01DE /* ButtonForBorderless.m */,
+				ECD5922811467E9A00EA01DE /* StickyCentral.h */,
+				ECD5922911467E9A00EA01DE /* StickyCentral.m */,
+				ECD5922A11467E9A00EA01DE /* StickyControler.h */,
+				ECD5922B11467E9A00EA01DE /* StickyControler.m */,
+				ECD5922C11467E9A00EA01DE /* StickyObject.h */,
+				ECD5922D11467E9A00EA01DE /* StickyObject.m */,
+				ECD5922E11467E9A00EA01DE /* TextViewForBorderless.h */,
+				ECD5922F11467E9A00EA01DE /* TextViewForBorderless.m */,
+			);
+			name = "Sticky Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -941,6 +1002,7 @@
 				21EA369B111C9AD900E2B517 /* Ceci est le titre d'une note.nvhelp in Resources */,
 				21EA369C111C9AD900E2B517 /* Contact.nvhelp in Resources */,
 				21E6EC21111DD52B0038ECC7 /* Comment ça marche.nvhelp in Resources */,
+				ECD592701146802300EA01DE /* StickyWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,6 +1087,16 @@
 				21AD2850110BE99B00B7A985 /* SyncSessionController.m in Sources */,
 				212C6952110E1940004DD82C /* TitlebarButton.m in Sources */,
 				21B548FA112F307E00E163A1 /* NotationDirectoryManager.m in Sources */,
+				ECD5923011467E9A00EA01DE /* AutoMoveCentral.m in Sources */,
+				ECD5923111467E9A00EA01DE /* AutoMoveWindow.m in Sources */,
+				ECD5923211467E9A00EA01DE /* BorderlessView.m in Sources */,
+				ECD5923311467E9A00EA01DE /* BorderlessWindow.m in Sources */,
+				ECD5923411467E9A00EA01DE /* BorderlessWindowControler.m in Sources */,
+				ECD5923511467E9A00EA01DE /* ButtonForBorderless.m in Sources */,
+				ECD5923611467E9A00EA01DE /* StickyCentral.m in Sources */,
+				ECD5923711467E9A00EA01DE /* StickyControler.m in Sources */,
+				ECD5923811467E9A00EA01DE /* StickyObject.m in Sources */,
+				ECD5923911467E9A00EA01DE /* TextViewForBorderless.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

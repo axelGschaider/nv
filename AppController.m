@@ -96,6 +96,12 @@
 	//this will not make a difference
 	[window useOptimizedDrawing:YES];
 	
+	//AXELS CODE * * * *
+	stickyCentral = [[StickyCentral alloc] initWithTableView:notesTableView contr:self];
+	
+	[self updateStickyStates];
+	
+	//* * * * AXELS CODE END
 
 	//[window makeKeyAndOrderFront:self];
 	//[self setEmptyViewState:YES];
@@ -358,6 +364,51 @@ terminateApp:
 	} else if (selector == @selector(fixFileEncoding:)) {
 		
 		return (currentNote != nil && storageFormatOfNote(currentNote) == PlainTextFormat && ![currentNote contentsWere7Bit]);
+	}
+	// AXELS CODE
+	else if (selector == @selector(createStickies:)) {
+		
+		NSIndexSet *indices = [notesTableView selectedRowIndexes];
+		
+		if ([indices count] > 0) {
+			NSArray *notes = [notationController notesAtIndexes:indices];
+			
+			NSEnumerator *enumerator = [notes objectEnumerator];
+			
+			NoteObject* note;
+			
+			while ((note = [enumerator nextObject])) {
+				
+				if (![stickyCentral isOpenAsSticky:note]) {
+					return YES;
+				}
+				
+			}
+			
+		}
+		return NO;
+		
+	}
+	else if (selector == @selector(setStickyOpaqueToggle:)) {
+		
+		NSArray* windows = [stickyCentral focusWindows];
+		
+		if ([windows count] == 0) {
+			return NO;
+		}
+		
+		return YES;
+		
+	}
+	else if (selector == @selector(setStickyFloatingToggle:)) {
+		NSArray* windows = [stickyCentral focusWindows];
+		
+		if ([windows count] == 0) {
+			return NO;
+		}
+		
+		return YES;
+		
 	}
 	
 	return YES;
@@ -1112,8 +1163,36 @@ terminateApp:
 			[textView setNeedsDisplayInRect:[textView visibleRect] avoidAdditionalLayout:YES];
 		}
 		
+		//AXELS CODE
+		
+		NSTextStorage * oldStorage = [textView textStorage];
+		NSTextStorage * newStorage = nil;
+		
+		if (!(newStorage = [stickyCentral textStorageForNote:note])) {
+			//restore string
+			newStorage = [[NSTextStorage alloc] init];
+			[newStorage setAttributedString:[note contentString]];
+			
+			
+			//[[textView textStorage] setAttributedString:[note contentString]];
+			
+		}
+		
+		NSLayoutManager * manager = [textView layoutManager];
+		[oldStorage removeLayoutManager:manager];
+		
+		if ([[oldStorage layoutManagers] count] == 0) {
+			[oldStorage release];
+		}
+		
+		[newStorage addLayoutManager:manager];
+		
+		
+		
+		//AXELS CODE END
+		
 		//restore string
-		[[textView textStorage] setAttributedString:[note contentString]];
+		//[[textView textStorage] setAttributedString:[note contentString]];
 		
 		//[textView setAutomaticallySelectedRange:NSMakeRange(0,0)];
 		
@@ -1393,6 +1472,9 @@ terminateApp:
 		[field setStringValue:titleOfNote(currentNote)];
     }
 	[[prefsController bookmarksController] updateBookmarksUI];
+	
+	//AXELS CODE
+	[stickyCentral updateTitleForNode:aNoteObject];
 }
 
 - (void)contentsUpdatedForNote:(NoteObject*)aNoteObject {
@@ -1532,6 +1614,213 @@ terminateApp:
 
 - (NSWindow*)window {
 	return window;
+}
+
+//Axels Code
+- (IBAction) createStickies:(id)sender {
+	[notesTableView abortEditing];
+	
+	NSIndexSet *indexes = [notesTableView selectedRowIndexes];
+	if ([indexes count] > 0) {
+		
+		NSArray *notes = [notationController notesAtIndexes:indexes];
+		
+		NSEnumerator *enumerator = [notes objectEnumerator];
+		NoteObject* note;
+		
+		while ((note = [enumerator nextObject])) {
+			
+			if (note == currentNote) {
+				NSTextStorage *storage = [[textView layoutManager] textStorage];
+				[stickyCentral openStickyWithNote:note textStorage:storage];
+			}
+			else {
+				[stickyCentral openStickyWithNote:note];
+			}
+			
+		}
+		
+		
+	}
+	
+}
+
+- (IBAction) stickiesToggle: (id) sender {
+	
+	[stickyCentral visibleToggle];
+	
+}
+
+- (IBAction) closeSticky: (id) sender {
+	
+}
+
+- (IBAction)setStickyFloatingToggle:(id)sender {
+	//[stickyCentral focusWindowFloatToggle];
+	NSArray* windows = [stickyCentral focusWindows];
+	
+	NSEnumerator* enu = [windows objectEnumerator];
+	
+	StickyControler* contr;
+	
+	while ((contr = [enu nextObject])) {
+		[contr setFloating:stickiesToFloating];
+	}
+	
+	[self updateStickyStates];
+	
+}
+
+- (IBAction)setStickyOpaqueToggle:(id)sender {
+	//[stickyCentral focusWindowOpaqueToggle];
+	NSArray* windows = [stickyCentral focusWindows];
+	
+	NSEnumerator* enu = [windows objectEnumerator];
+	
+	StickyControler* contr;
+	
+	while ((contr = [enu nextObject])) {
+		[contr setOpaque:stickiesToOpaque];
+	}
+	
+	[self updateStickyStates];
+	
+}
+
+- (void) updateStickyMenus {
+	
+	NSLog(@"update Sticky Menus");
+	
+	NSMenu *stickiesMenu = [[[NSApp mainMenu] itemWithTag:STICKY_MENU_ID] submenu];
+	
+	if (stickiesMenu == nil) {
+		NSLog(@"Cluster Fuck");
+	}
+	
+	int menuIndex = [stickiesMenu indexOfItemWithTarget:self andAction:@selector(setStickyFloatingToggle:)];
+	NSMenuItem *floatItem = nil;
+	
+	
+	if (menuIndex > -1) {
+		floatItem = [stickiesMenu itemAtIndex:menuIndex];
+	}
+	
+	
+	
+	if (stickiesToFloating) {
+		[floatItem setState:NSOffState];
+	}
+	else {
+		[floatItem setState:NSOnState];
+	}
+	
+	
+	menuIndex = [stickiesMenu indexOfItemWithTarget:self andAction:@selector(setStickyOpaqueToggle:)];
+	NSMenuItem *opaqueItem = nil;
+	if (menuIndex > -1) {
+		opaqueItem = [stickiesMenu itemAtIndex:menuIndex];
+	}
+	
+	if (stickiesToOpaque) {
+		[opaqueItem setState:NSOffState];
+	}
+	else {
+		[opaqueItem setState:NSOnState];
+	}
+	
+	
+}
+
+- (void) updateStickyStates {
+	
+	NSArray * windows = [stickyCentral focusWindows];
+	
+	NSEnumerator * enu = [windows objectEnumerator];
+	
+	stickiesToOpaque = YES;
+	stickiesToFloating = YES;
+	
+	StickyControler * cont = nil;
+	
+	while ((cont = [enu nextObject])) {
+		
+		if ([cont isFloating]) {
+			stickiesToFloating = NO;
+		}
+		
+		if ([cont isOpaque]) {
+			stickiesToOpaque = NO;
+		}
+		
+	}
+	
+	[self updateStickyMenus];
+}
+
+- (IBAction)setStickyBlue:(id)sender; {
+	
+	NSEnumerator * enu = [[stickyCentral focusWindows] objectEnumerator];
+	
+	StickyControler * cont = nil;
+	
+	while ((cont = [enu nextObject])) {
+		[cont setBlue];
+	}
+	
+}
+
+- (IBAction)setStickyGreen:(id)sender; {
+	NSEnumerator * enu = [[stickyCentral focusWindows] objectEnumerator];
+	
+	StickyControler * cont = nil;
+	
+	while ((cont = [enu nextObject])) {
+		[cont setGreen];
+	}
+}
+
+- (IBAction)setStickyGrey:(id)sender; {
+	NSEnumerator * enu = [[stickyCentral focusWindows] objectEnumerator];
+	
+	StickyControler * cont = nil;
+	
+	while ((cont = [enu nextObject])) {
+		[cont setGrey];
+	}
+}
+
+- (IBAction)setStickyPink:(id)sender; {
+	NSEnumerator * enu = [[stickyCentral focusWindows] objectEnumerator];
+	
+	StickyControler * cont = nil;
+	
+	while ((cont = [enu nextObject])) {
+		[cont setPink];
+	}
+}
+
+- (IBAction)setStickyViolet:(id)sender; {
+	NSEnumerator * enu = [[stickyCentral focusWindows] objectEnumerator];
+	
+	StickyControler * cont = nil;
+	
+	while ((cont = [enu nextObject])) {
+		[cont setViolet];
+	}
+}
+
+- (IBAction)setStickyYellow:(id)sender; {
+	NSEnumerator * enu = [[stickyCentral focusWindows] objectEnumerator];
+	
+	StickyControler * cont = nil;
+	
+	while ((cont = [enu nextObject])) {
+		[cont setYellow];
+	}
+}
+
+- (IBAction)moveStickiesToTop:(id)sender {
+	[stickyCentral moveAllToTop];
 }
 
 @end

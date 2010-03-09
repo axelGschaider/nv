@@ -16,6 +16,7 @@
 
 #import "NotationController.h"
 #import "NotesTableView.h"
+#import "StickyCentral.h"
 
 @class LinkingEditor;
 @class EmptyView;
@@ -27,6 +28,8 @@
 @class RBSplitSubview;
 @class TitlebarButton;
 @class LinearDividerShader;
+@class StickyCentral;
+
 
 @interface AppController : NSObject {
     IBOutlet DualField *field;
@@ -61,6 +64,10 @@
 	
 	NoteObject *currentNote;
 	NSArray *savedSelectedNotes;
+	
+	//Axels Codes
+	StickyCentral *stickyCentral;
+	BOOL stickiesToFloating, stickiesToOpaque;
 }
 
 void outletObjectAwoke(id sender);
@@ -105,5 +112,21 @@ void outletObjectAwoke(id sender);
 - (IBAction)toggleNVActivation:(id)sender;
 - (IBAction)bringFocusToControlField:(id)sender;
 - (NSWindow*)window;
+
+//Axels Code
+- (IBAction)createStickies:(id)sender;
+- (IBAction)stickiesToggle:(id)sender;
+- (IBAction)closeSticky:(id)sender;
+- (IBAction)setStickyFloatingToggle:(id)sender;
+- (IBAction)setStickyOpaqueToggle:(id)sender;
+- (IBAction)setStickyBlue:(id)sender;
+- (IBAction)setStickyGreen:(id)sender;
+- (IBAction)setStickyGrey:(id)sender;
+- (IBAction)setStickyPink:(id)sender;
+- (IBAction)setStickyViolet:(id)sender;
+- (IBAction)setStickyYellow:(id)sender;
+- (IBAction)moveStickiesToTop:(id)sender;
+- (void) updateStickyMenus;
+- (void) updateStickyStates;
 
 @end
