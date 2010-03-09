@@ -63,14 +63,6 @@
 
 
 
-/*- (void)makeKeyAndOrderFront:(id)sender {
-	
-	NSLog("Bin da!!!!!");
-	
-	//[super makeKeyAndOrderFront:sender];
-	
-} /* */
-
 - (void) minimize {
 	if (!isMinimized) {
 		isMinimized = YES;
@@ -139,7 +131,6 @@
 	initialWindowFrame = NSMakeRect(tmpR.origin.x, tmpR.origin.y, tmpR.size.width, tmpR.size.height);
 	
 	if ( [self resizingMode] ) {
-		//NSLog(@"resizingMode");
 		resizeAction = YES;
 		dragAction = NO;
 		
@@ -147,7 +138,6 @@
 	else {
 		
 		if ( [self draggingMode] ) {
-			//NSLog(@"draggingMode");
 			resizeAction = NO;
 			dragAction = YES;
 		}
@@ -200,7 +190,6 @@
 	NSRect screenFrame = [[NSScreen mainScreen] frame];
 	
 	if (dragAction) {
-		//NSLog(@"dragging");
 		int requestedPositionX = currentLocationOnScreen.x - initialLocationInWindow.x;
 		int requestedPositionY = currentLocationOnScreen.y - initialLocationInWindow.y;
 		
@@ -236,8 +225,6 @@
 	}
 	else {
 		if (resizeAction) {
-			
-			//NSLog(@"Resizing");
 			
 			float xDif = currentLocationOnScreen.x - initialLocationOnScreen.x;
 			float yDif = initialLocationOnScreen.y - currentLocationOnScreen.y;
@@ -303,12 +290,6 @@
 }
 
 - (BOOL)resizingMode {
-	
-	/*int initLocX = initialLocationInWindow.x;
-	int initWidth = initialWindowFrame.size.width;
-	int initLocY = initialLocationInWindow.y;
-	
-	NSLog(@"initWLocX_%d > (initWidth_%d - resSpaceWidth_%d)  &&  initWLocY_%d < resSpaceHeight_%d", initLocX, initWidth, resizingSpaceWidth, initLocY, resizingSpaceHeight);/* */
 	
 	return initialLocationInWindow.x > initialWindowFrame.size.width - resizingSpaceWidth && initialLocationInWindow.y < resizingSpaceHeight;
 }

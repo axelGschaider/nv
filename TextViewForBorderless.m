@@ -68,8 +68,6 @@
 	graphicsContext = [NSGraphicsContext currentContext];
     windowContext = [graphicsContext graphicsPort];
 	
-	//NSLog(@"width: %d  height: %d", width, height);
-	
 	CGContextSetRGBStrokeColor(windowContext, 0, 0, 0, 0.8);
 	
 	CGContextBeginPath(windowContext);
@@ -112,8 +110,6 @@
 /*-(void) resetCursorRects {
 	[super resetCursorRects];
 	
-	NSLog(@"sollte da sein");
-	
 	NSCursor *hc = [NSCursor openHandCursor];
 	//[hc setOnMouseExited:NO];
 	[hc setOnMouseEntered:YES];
@@ -125,7 +121,6 @@
 } /* */
 
 - (void) didChangeText {
-	//NSLog(@"did Change in Borderless");
 	[daWindow textContentDidChange];
 	[super didChangeText];
 }

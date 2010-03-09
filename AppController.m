@@ -1689,12 +1689,9 @@ terminateApp:
 
 - (void) updateStickyMenus {
 	
-	NSLog(@"update Sticky Menus");
-	
 	NSMenu *stickiesMenu = [[[NSApp mainMenu] itemWithTag:STICKY_MENU_ID] submenu];
 	
 	if (stickiesMenu == nil) {
-		NSLog(@"Cluster Fuck");
 	}
 	
 	int menuIndex = [stickiesMenu indexOfItemWithTarget:self andAction:@selector(setStickyFloatingToggle:)];

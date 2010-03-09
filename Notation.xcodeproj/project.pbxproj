@@ -486,6 +486,7 @@
 			children = (
 				214498800AE1931700E2A2B6 /* UI Decision Classes */,
 				2191930609CFBED200586B15 /* View Classes */,
+				ECD5923D11467EC100EA01DE /* Sticky Classes */,
 				21D60126098FDB46007440DF /* GlobalPrefs.h */,
 				21D60127098FDB46007440DF /* GlobalPrefs.m */,
 				2191982009D607C600586B15 /* PrefsWindowController.h */,
@@ -536,7 +537,6 @@
 				D3EEC9FE106F66C70023D7F8 /* NVPasswordGenerator.m */,
 				21B1BC341104D20E0004A7D0 /* InvocationRecorder.h */,
 				21B1BC351104D20E0004A7D0 /* InvocationRecorder.m */,
-				ECD5923D11467EC100EA01DE /* Sticky Classes */,
 				21F0793710EC5E21004FE56F /* Sync Services */,
 				212089CF0B0C2BCF00A15A69 /* Note Importing */,
 			);

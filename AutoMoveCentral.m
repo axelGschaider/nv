@@ -59,7 +59,6 @@
 		xUpdated = screenWidth - width;
 	}
 	
-	//NSLog(@"sj %d uy %d", screenHeight, upperY);
 	
 	tmp = screenHeight - upperY;
 	if (tmp < clip && tmp > -clip) {
@@ -94,12 +93,10 @@
 			
 			if ( x >= xLeftTest && x <= xRightTest ) { // -> left corner x is enclosed by other window x
 				xOverlap = YES;
-				//NSLog(@"xOverlap");
 			}
 			
 			if (rightX >= xLeftTest && rightX <= xRightTest) { // -> right corner x is enclosed by other window x
 				xOverlap = YES;
-				//NSLog(@"xOverlap2");
 			}
 			
 			if (x <= xLeftTest && rightX >= xRightTest) { // -> we are bigger than the other window but still overlap
@@ -108,12 +105,10 @@
 			
 			if ( y >= yDownTest && y <= yUpTest ) {
 				yOverlap = YES;
-				//NSLog(@"yOverlap");
 			}
 			
 			if ( upperY >= yDownTest && upperY <= yUpTest ) {
 				yOverlap = YES;
-				//NSLog(@"yOverlap2");
 			}
 			
 			if (y <= yDownTest && upperY >= yUpTest) {
@@ -311,22 +306,56 @@
 	NSRect screen = [win getUsableScreen];
 	
 	int currentUpperHeight = screen.size.height;
-	int futureUpperHeight = currentUpperHeight;
+	//int futureUpperHeight = currentUpperHeight;
+	int maxWindowHeight = 0;
 	int xStart = screen.origin.x;
-	int maxRightX = xStart + screen.size.height;
+	int maxRightX = screen.size.width;//xStart + screen.size.height;
 	int currentLeftX = xStart;
+	
 	
 	int daIndex = 0;
 	
-	while (count > daIndex++) {
+	while (count > daIndex) {
+		
 		win = [windows objectAtIndex:daIndex];
+		
+		daIndex++;
 		
 		NSRect frame = [win frame];
 		
-		if (frame.size.width + currentLeftX > maxRightX) {
+		if (frame.size.width + currentLeftX >= maxRightX) {
+			
+			currentUpperHeight = currentUpperHeight - maxWindowHeight;
+			
+			if (currentUpperHeight <= 20) {
+				currentUpperHeight = screen.size.height;
+				
+				xStart = xStart + 20;
+				if (xStart >= 100) {
+					xStart = screen.origin.x;
+				}
+				
+			}
+			
 			currentLeftX = xStart;
-			currentUpperHeight = futureUpperHeight;
+			
+			maxWindowHeight = 0;
 		}
+		
+		//NSPoint newOrigin = NSMakePoint(currentLeftX, currentUpperHeight - frame.size.height);
+		
+		frame.origin.x = currentLeftX;
+		frame.origin.y = currentUpperHeight - frame.size.height;
+		
+		//[win setFrameOriginNoCall:newOrigin];
+		[win setFrameNoCall:frame display:YES animate:YES];
+		
+		
+		if (frame.size.height > maxWindowHeight) {
+			maxWindowHeight = frame.size.height;
+		}
+		
+		currentLeftX = currentLeftX + frame.size.width;
 		
 	}
 	

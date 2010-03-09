@@ -59,8 +59,6 @@
 	CGContextStrokePath(windowContext);
 	CGContextClosePath(windowContext);  /* */
 	
-	//NSLog(@"Redrawing . . . ");
-	
 	[super drawRect:rect];
 	
 	
