@@ -24,5 +24,6 @@
 - (void)setInitialPosition:(AutoMoveWindow *) window;
 - (BOOL)isAnyBodyAtThisPosition:(AutoMoveWindow *) window;
 - (void) moveAllToTop;
+- (void) moveAllToBottom;
 
 @end

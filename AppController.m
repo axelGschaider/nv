@@ -1820,4 +1820,8 @@ terminateApp:
 	[stickyCentral moveAllToTop];
 }
 
+- (IBAction)moveStickiesToBottom:(id) sender {
+	[stickyCentral moveAllToBottom];
+}
+
 @end

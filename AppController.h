@@ -126,6 +126,7 @@ void outletObjectAwoke(id sender);
 - (IBAction)setStickyViolet:(id)sender;
 - (IBAction)setStickyYellow:(id)sender;
 - (IBAction)moveStickiesToTop:(id)sender;
+- (IBAction)moveStickiesToBottom:(id) sender;
 - (void) updateStickyMenus;
 - (void) updateStickyStates;
 

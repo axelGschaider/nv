@@ -309,7 +309,7 @@
 	//int futureUpperHeight = currentUpperHeight;
 	int maxWindowHeight = 0;
 	int xStart = screen.origin.x;
-	int maxRightX = screen.size.width;//xStart + screen.size.height;
+	int maxRightX = screen.origin.x + screen.size.width;//xStart + screen.size.height;
 	int currentLeftX = xStart;
 	
 	
@@ -350,6 +350,72 @@
 		//[win setFrameOriginNoCall:newOrigin];
 		[win setFrameNoCall:frame display:YES animate:YES];
 		
+		
+		if (frame.size.height > maxWindowHeight) {
+			maxWindowHeight = frame.size.height;
+		}
+		
+		currentLeftX = currentLeftX + frame.size.width;
+		
+	}
+	
+}
+
+- (void) moveAllToBottom {
+	
+	int count = [windows count];
+	
+	if (count == 0) {
+		return;
+	}
+	
+	NSRect screen = [[windows objectAtIndex:0] getUsableScreen];
+	
+	int currentLowerY = screen.origin.y;
+	int maxWindowHeight = 0;
+	int xStart = screen.origin.x;
+	int maxRightX = xStart + screen.size.width;
+	int currentLeftX = xStart;
+	
+	int daIndex = 0;
+	
+	while (count > daIndex) {
+		AutoMoveWindow * win = [windows objectAtIndex:daIndex];
+		daIndex++;
+		
+		NSRect frame = [win frame];
+		
+		if (frame.size.width + currentLeftX >= maxRightX) {
+			
+			currentLowerY = currentLowerY + maxWindowHeight;
+			
+			if (currentLowerY + 50 >= screen.origin.y + screen.size.height) {
+				currentLowerY = screen.origin.y;
+				
+				xStart = xStart + 20;
+				if (xStart >= 100) {
+					xStart = screen.origin.x;
+				}
+				
+			}
+			
+			currentLeftX = xStart;
+			
+			maxWindowHeight = 0;
+			
+		}
+		
+		
+		
+		
+		frame.origin.x = currentLeftX;
+		frame.origin.y = currentLowerY;
+		
+		if (currentLowerY + frame.size.height >= screen.origin.y + screen.size.height) {
+			frame.origin.y = (screen.origin.y + screen.size.height) - frame.size.height;
+		}
+		
+		[win setFrameNoCall:frame display:YES animate:YES];
 		
 		if (frame.size.height > maxWindowHeight) {
 			maxWindowHeight = frame.size.height;
