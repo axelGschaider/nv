@@ -145,8 +145,6 @@
 	
 	[focusWindows addObject:controler];
 	
-	//NSLog(@"register -> %d", [focusWindows count]);
-	
 	[appControler updateStickyStates];
 	
 }
@@ -160,8 +158,6 @@
 	//UPDATE FOR MULTIPLE SELECTIONS
 	
 	[focusWindows removeObject:controler];
-	
-	//NSLog(@"unregister -> %d", [focusWindows count]);
 	
 	[appControler updateStickyStates];
 }

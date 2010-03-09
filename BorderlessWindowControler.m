@@ -293,7 +293,7 @@
 }
 
 - (void) textContentDidChange {
-	//NSLog(@"Change in Controler");
+	
 }
 
 @end

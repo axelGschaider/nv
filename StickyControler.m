@@ -77,7 +77,6 @@
 }
 
 - (void) textContentDidChange {
-	//NSLog(@"Change in Sticky Controler");
 	[myNote setContentString:[textView textStorage]];
 }
 

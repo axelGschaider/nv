@@ -13,12 +13,6 @@
 
 - (void) initWithCentral:(AutoMoveCentral *)daCentral {
 	
-	/*if (daCentral == nil) {
-		NSLog(@"Clusterfuck");
-	}
-	else {
-		NSLog(@"Sollte registriert werden");
-	}/* */
 
 	
 	central = daCentral;
