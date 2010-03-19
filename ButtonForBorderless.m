@@ -11,22 +11,10 @@
 
 @implementation ButtonForBorderless
 
-/*- (void) performClick:(int)sender {
-	
-	[super performClick:sender];
-	
-	[daWindow display];
-	
-} /* */
 
-/*- (void)setState:(NSInteger)value {
-	
-	[super setState:value];
-	
-	[daWindow display];
-	
-} /* */
-
+/**
+ * repaints the whole window
+ */
 - (void)mouseDown:(NSEvent *)theEvent {
 	[daWindow display];
 	

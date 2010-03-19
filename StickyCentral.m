@@ -11,13 +11,15 @@
 
 @implementation StickyCentral
 
+/**
+ * opens a new Sticky note
+ */
 - (void) openStickyWithNote:(NoteObject *)note textStorage:(NSTextStorage *)storage {
 	
-	StickyControler *controler = [[StickyControler alloc] initWithStickyCentral:self];
-	
+		
 	int count = [stickies count];
 	
-	while (count--) {
+	while (count--) { //check if this note is allready open in a sticky
 		id obj = [stickies objectAtIndex:count];
 		
 		StickyObject *s = obj;
@@ -28,6 +30,8 @@
 		
 	}
 	
+	StickyControler *controler = [[StickyControler alloc] initWithStickyCentral:self];
+	
 	if(![NSBundle loadNibNamed:@"StickyWindow" owner:controler]) {
 		NSLog(@"Error loading Nib for Sticky!");
 	}
@@ -37,14 +41,12 @@
 		
 		[stickies addObject:s];
 		
-		//[controler initWindowWithCentral:self];
 		[controler intiWindowWithCentralAndSetWindowToInitPos:self];
 		[controler setNoteObject:note textStorage:storage];
 
 		[controler setYellow];
 		[controler showWindow:self];
-		//[controler setGreen];
-	}/* */
+	}
 	
 }
 
@@ -71,6 +73,9 @@
 	return [super init];
 }
 
+/**
+ * removes and closes the sticky
+ */
 - (void) removeStickyWithNote:(NoteObject *) note {
 	int count = [stickies count];
 	
@@ -85,6 +90,7 @@
 			[self unregisterAsFocusWindow: [s controler]];
 			
 			//[[s controler] release];
+			[s release];
 			
 			[appControler updateStickyStates];
 			
@@ -94,6 +100,9 @@
 	}
 }
 
+/**
+ * wether the give note is allready open as sticky
+ */
 - (BOOL) isOpenAsSticky:(NoteObject *)aNote {
 	
 	int count = [stickies count];
@@ -113,6 +122,9 @@
 	
 }
 
+/*
+ * shows all stickies if they are hidden or hides them if they are shown
+ */
 - (BOOL) visibleToggle {
 	visible = !visible;
 	
@@ -131,6 +143,9 @@
 	
 }
 
+/**
+ * registers a new window as focus window (a window that has the users focus)
+ */
 - (void) registerAsFocusWindow:(StickyControler *)controler multipleSelection:(BOOL)mult{
 	
 	/*if (!mult) {
@@ -149,6 +164,9 @@
 	
 }
 
+/**
+ * unregisteres a window as focus window (a window that has the users focus)
+ */
 - (void) unregisterAsFocusWindow:(StickyControler *)controler {
 	
 	/*if ([focusWindows containsObject:controler]) {
@@ -177,12 +195,18 @@
 	
 }*/
 
+/**
+ * wether the given window is registered as focus window
+ */
 - (BOOL) isRegisteredAsFocusWindow:(StickyControler *)controler {
 	
 	return [windows containsObject:controler];
 	
 }
 
+/**
+ * returns all focus windows (an array of StickyControlers)
+ */
 - (NSMutableArray*) focusWindows {
 	return focusWindows;
 }
@@ -228,6 +252,9 @@
 	
 } /* */
 
+/**
+ * updates the title of the stickiy for the given note
+ */
 - (void) updateTitleForNode: (NoteObject *)note {
 	StickyObject * sticky = nil;
 	
@@ -246,6 +273,9 @@
 	
 }
 
+/**
+ * returns the NSTextStorage for the given window
+ */
 - (NSTextStorage *) textStorageForNote:(NoteObject *)aNote {
 	
 	StickyObject * sticky = nil;
@@ -266,6 +296,9 @@
 	
 }
 
+/**
+ * minimizes all Stickies
+ */
 - (void) minimizeAll {
 	NSEnumerator * enu = [stickies objectEnumerator];
 	
@@ -281,6 +314,9 @@
 	
 }
 
+/**
+ * maximizes (or unminimizes) all stickies
+ */
 - (void) maximizeAll {
 	NSEnumerator * enu = [stickies objectEnumerator];
 	
@@ -293,6 +329,29 @@
 		}
 		
 	}
+}
+
+/**
+ * 
+ */
+- (void) stackWindowsAccordingToColor {
+	
+	StickyOrdererByColor * orderer = [[StickyOrdererByColor alloc] init];
+	
+	windows = [orderer sortTheWindows:stickies];
+	
+	[self stackWindowsInCurrentOrder];
+	
+}
+
+- (void) stackWindowsAccordingToCreationDate {
+	
+	StickyOrdererByCreationDate * orderer = [[StickyOrdererByCreationDate alloc] init];
+	
+	windows = [orderer sortTheWindows:stickies];
+	
+	[self stackWindowsInCurrentOrder];
+	
 }
 
 

@@ -13,6 +13,10 @@
 #import "NotesTableView.h"
 #import "StickyObject.h"
 #import "AppController.h"
+#import "StickyOrdererByColor.h"
+#import "StickyOrdererByTitle.h"
+#import "StickyOrdererByPosition.h"
+#import "StickyOrdererByCreationDate.h"
 
 
 /*typedef struct _Sticky {
@@ -50,5 +54,7 @@
 - (void) maximizeAll;
 //- (int) focusWindowIndex: (StickyControler *) controler;
 
+- (void) stackWindowsAccordingToColor;
+- (void) stackWindowsAccordingToCreationDate;
 
 @end

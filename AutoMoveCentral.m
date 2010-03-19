@@ -11,22 +11,37 @@
 
 @implementation AutoMoveCentral
 
+
+/**
+ * initiates this and creates the windows array
+ */
 - (id) init {
 	windows = [[NSMutableArray alloc] init];
 	return self;
 }
 
+/**
+ * adds the given window to the registered windows
+ */
 - (void) registerWindow:(AutoMoveWindow *)window {
 	[windows addObject:window];
 	
 }
 
+
+/**
+ * removes the given window from the registered windows
+ */
 - (void) unregisterWindow:(AutoMoveWindow *)window {
 	
 	[windows removeObject:window];
 	
 }
 
+/**
+ * alters the given frame to "clip" AutoMoveWindows to each other, when they
+ * are moved close to each other
+ */
 - (NSRect) alterFrameChange:(NSRect)frame :(AutoMoveWindow *)window {
 	
 	int clip = 14;
@@ -44,22 +59,25 @@
 	int screenHeight = screenFrame.size.height;
 	int screenWidth = screenFrame.size.width;
 	
-	
+	// we are close to the left screen edge
 	if (x < clip && x > -clip) {
 		xUpdated = 0;
 	}
 	
+	// we are close to the bottom edge
 	if (y < clip && y > -clip) {
 		yUpdated = 0;
 	}
 	
 	int tmp = screenWidth - rightX;
 	
+	
+	// we are close to the right edge
 	if (tmp < clip && tmp > -clip) {
 		xUpdated = screenWidth - width;
 	}
 	
-	
+	// we are close to the top edge
 	tmp = screenHeight - upperY;
 	if (tmp < clip && tmp > -clip) {
 		y = screenHeight - height;
@@ -74,10 +92,13 @@
 	BOOL clippedY = NO;
 	
 	
-	while (count--) {
+	while (count--) { //for all windows:
+		
 		id obj = [windows objectAtIndex:count];
 		
+		//only if it's not the window to be altered
 		if (obj != window) {
+			
 			AutoMoveWindow *amw = obj;
 			
 			BOOL xOverlap = NO;
@@ -115,7 +136,7 @@
 				yOverlap = YES;
 			}
 			
-			if (!(xOverlap && yOverlap) && (xOverlap || yOverlap)) { //if windows themselfes are not overlapping but there is a x- or y-overlap
+			if (!(xOverlap && yOverlap) && (xOverlap || yOverlap)) { //if windows themselfes are not overlapping but there is a x- or y-overlap (i.e. not both)
 				
 				if (xOverlap) {
 					//no yOverlap -> this window must be to the above or bellow the other one
@@ -223,6 +244,10 @@
 	
 }
 
+/**
+ * Sets a (new) window wo its initial position. If an other window is allready
+ * at this position, a new position is computed and so on . . . 
+ */
 - (void)setInitialPosition:(AutoMoveWindow *) window {
 	
 	
@@ -237,8 +262,6 @@
 	
 	frame.origin.x = startX;
 	frame.origin.y = startY;
-	
-	//[window setFrameNoCall:frame display:NO animate:NO];
 	
 	int iterateX = startX;
 	int iterateY = startY;
@@ -269,6 +292,9 @@
 		
 }
 
+/**
+ * returnes wether thers is allready another window at this position
+ */
 - (BOOL)isAnyBodyAtThisPosition:(AutoMoveWindow *) window {
 	
 	int count = [windows count];
@@ -276,7 +302,7 @@
 	while (count--) {
 		id obj = [windows objectAtIndex:count];
 		
-		if (window != obj) {
+		if (window != obj) { //only if it's not the given window
 			AutoMoveWindow *w = obj;
 			NSPoint wRec1 = [window frame].origin;
 			NSPoint wRec2 = [w frame].origin;
@@ -293,6 +319,10 @@
 	
 }
 
+/**
+ * moves all windows to the top of the screen. If a line is full the next line
+ * is set bellow the highest one of the previous one.
+ */
 - (void) moveAllToTop {
 	
 	int count = [windows count];
@@ -306,7 +336,6 @@
 	NSRect screen = [win getUsableScreen];
 	
 	int currentUpperHeight = screen.size.height;
-	//int futureUpperHeight = currentUpperHeight;
 	int maxWindowHeight = 0;
 	int xStart = screen.origin.x;
 	int maxRightX = screen.origin.x + screen.size.width;//xStart + screen.size.height;
@@ -315,6 +344,7 @@
 	
 	int daIndex = 0;
 	
+	// set the windows
 	while (count > daIndex) {
 		
 		win = [windows objectAtIndex:daIndex];
@@ -323,10 +353,13 @@
 		
 		NSRect frame = [win frame];
 		
+		//if the current window is to broad for the current line, start a new one
 		if (frame.size.width + currentLeftX >= maxRightX) {
 			
 			currentUpperHeight = currentUpperHeight - maxWindowHeight;
 			
+			//if we have almost reached the bottom of the screen, jump back to
+			//top and start again from a little x-offset
 			if (currentUpperHeight <= 20) {
 				currentUpperHeight = screen.size.height;
 				
@@ -342,30 +375,33 @@
 			maxWindowHeight = 0;
 		}
 		
-		//NSPoint newOrigin = NSMakePoint(currentLeftX, currentUpperHeight - frame.size.height);
-		
+		//set the windows new position
 		frame.origin.x = currentLeftX;
 		frame.origin.y = currentUpperHeight - frame.size.height;
 		
-		//[win setFrameOriginNoCall:newOrigin];
 		[win setFrameNoCall:frame display:YES animate:YES];
 		
-		
+		//check if this is the currently highest window in the current line
 		if (frame.size.height > maxWindowHeight) {
 			maxWindowHeight = frame.size.height;
 		}
 		
+		//itterate the x position
 		currentLeftX = currentLeftX + frame.size.width;
 		
 	}
 	
 }
 
+/**
+ * moves all windows to the bottom of the screen and starts new lines if not all
+ * of them fit there
+ */
 - (void) moveAllToBottom {
 	
 	int count = [windows count];
 	
-	if (count == 0) {
+	if (count == 0) { //no windows. Quick end
 		return;
 	}
 	
@@ -379,16 +415,22 @@
 	
 	int daIndex = 0;
 	
+	
+	// for all windows ...
 	while (count > daIndex) {
 		AutoMoveWindow * win = [windows objectAtIndex:daIndex];
 		daIndex++;
 		
 		NSRect frame = [win frame];
 		
+		//if the current window is to broad for the rest of the line...
 		if (frame.size.width + currentLeftX >= maxRightX) {
 			
+			//one line higher
 			currentLowerY = currentLowerY + maxWindowHeight;
 			
+			// if we almost reached the top of the screen, jump back to bottom
+			// and continue with a little x offset
 			if (currentLowerY + 50 >= screen.origin.y + screen.size.height) {
 				currentLowerY = screen.origin.y;
 				
@@ -399,6 +441,7 @@
 				
 			}
 			
+			//reset to left edge
 			currentLeftX = xStart;
 			
 			maxWindowHeight = 0;
@@ -406,27 +449,30 @@
 		}
 		
 		
-		
-		
+		//set new window position
 		frame.origin.x = currentLeftX;
 		frame.origin.y = currentLowerY;
 		
+		//if we're to high (so the title bar would be out of the visible space)
 		if (currentLowerY + frame.size.height >= screen.origin.y + screen.size.height) {
 			frame.origin.y = (screen.origin.y + screen.size.height) - frame.size.height;
 		}
 		
 		[win setFrameNoCall:frame display:YES animate:YES];
 		
+		// check if this is the highest window in the current line
 		if (frame.size.height > maxWindowHeight) {
 			maxWindowHeight = frame.size.height;
 		}
 		
+		// itterate x position
 		currentLeftX = currentLeftX + frame.size.width;
 		
 	}
 	
 }
 
+// stacks the windows in the current order
 - (void) stackWindowsInCurrentOrder {
 	
 	int count = [windows count];
@@ -449,12 +495,15 @@
 	int currentLeftX = xStart;
 	int currentUpperY = maxY;
 	
+	// for every window
 	while (daIndex < count) {
 		AutoMoveWindow * win = [windows objectAtIndex:daIndex];
 		daIndex++;
 		
 		NSRect frame = [win frame];
 		
+		// if we reached the bottom or the right edge, reset to the next
+		// top-left starting point
 		if ( currentUpperY - frame.size.height < minY ||
 			 currentLeftX + frame.size.width > maxX) {
 			
@@ -464,13 +513,17 @@
 			
 		}
 		
+		//set the new frames position
 		frame.origin.x = currentLeftX;
 		frame.origin.y = currentUpperY - frame.size.height;
-		
+		[win orderFront:self];
 		[win setFrameNoCall:frame display:YES animate:YES];
 		
-		currentLeftX += 15;
+		//itterate for next window
+		//currentLeftX += 15;
 		currentUpperY -= 15;
+		
+		
 		
 	}
 	

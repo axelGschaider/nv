@@ -28,6 +28,9 @@
 	blueLow = 1;
 }
 
+/**
+ * draws the background colors before calling the same function in superclass
+ */
 - (void)drawRect:(NSRect)rect {
 	
 	
@@ -49,15 +52,7 @@
 	
 	NSRect upper = NSMakeRect(rect.origin.x, rect.size.height - draggingSpaceHight, rect.size.width, draggingSpaceHight);
 	CGContextSetRGBFillColor(windowContext, redUpper, greenUpper, blueUpper, 1);
-	NSRectFill(upper); /* */
-	
-	/*CGContextSetRGBStrokeColor(windowContext, 0, 0, 0, 1);
-	
-	CGContextMoveToPoint(windowContext, 0, 0);//draggingSpaceHight);
-	CGContextMoveToPoint(windowContext, rect.size.width, draggingSpaceHight);
-	
-	CGContextStrokePath(windowContext);
-	CGContextClosePath(windowContext);  /* */
+	NSRectFill(upper); 
 	
 	[super drawRect:rect];
 	

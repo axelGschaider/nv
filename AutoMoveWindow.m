@@ -11,9 +11,8 @@
 
 @implementation AutoMoveWindow
 
+// sets the AutoMoveCentral and registeres itself there
 - (void) initWithCentral:(AutoMoveCentral *)daCentral {
-	
-
 	
 	central = daCentral;
 	[central registerWindow:self];
@@ -21,11 +20,13 @@
 	
 }
 
+// closes this window and unregisteres itself at the AutoMoveCentral
 - (void) close {
 	[central unregisterWindow:self];
 	[super close];
 }
 
+// used to explizitely call setFrame (for position altering)
 - (void) setFrameOrigin:(NSPoint)aPoint {
 	NSRect daFrame = [self frame];
 	
@@ -36,27 +37,12 @@
 	
 }
 
+// used to possibliy alter the original request in order to clip this to the
+// screen edge or other windows
 - (void)setFrame:(NSRect)windowFrame display:(BOOL)displayViews animate:(BOOL)performAnimation {
 	
+	//request (possibly) new position
 	NSRect newFrame = [central alterFrameChange:windowFrame : self];
-	
-	/*int x = windowFrame.origin.x;
-	int y = windowFrame.origin.y;
-	int w = windowFrame.size.width;
-	int h = windowFrame.size.height;
-	
-	NSLog(@"old: %d %d %d %d",x,y,w,h);
-	
-	x = newFrame.origin.x;
-	y = newFrame.origin.y;
-	w = newFrame.size.width;
-	h = newFrame.size.height;
-	
-	NSLog(@"new: %d %d %d %d",x,y,w,h);
-	
-	if (central == nil) {
-		NSLog(@"Cluster Fuck");
-	} /* */
 	
 	BOOL anim = performAnimation;
 	
@@ -78,12 +64,18 @@
 	[super setFrame: newFrame display:displayViews animate:anim];
 	
 }
+
+
+/**
+ * used to set the position while dragging the window
+ */
 - (void)setFrameForDragging:(NSRect) aPoint {
 	
 	NSRect newFrame = [central alterFrameChange:aPoint : self];
 	
 	if (currentlyClipped) {
 		if (newFrame.origin.x == aPoint.origin.x && newFrame.origin.y == aPoint.origin.y) {
+			//we just left the clipping region
 			currentlyClipped = NO;
 		}
 	}
@@ -113,6 +105,9 @@
 	
 }
 
+/**
+ * returns the usable screen (excluding the menu bar and in the future the dock)
+ */
 - (NSRect) getUsableScreen {
 	NSRect f = [[NSScreen mainScreen] frame];
 	
@@ -121,11 +116,16 @@
 }
 
 
-
+/**
+ * should be used when position alteration is not required
+ */
 - (void)setFrameNoCall:(NSRect)windowFrame display:(BOOL)displayViews animate:(BOOL)performAnimation {
 	[super setFrame: windowFrame display:displayViews animate:performAnimation];
 }
 
+/**
+ * should be used when position alteration is not required
+ */
 - (void) setFrameOriginNoCall:(NSPoint)aPoint {
 	[super setFrameOrigin:aPoint];
 }

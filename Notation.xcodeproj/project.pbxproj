@@ -156,6 +156,10 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D3EECA00106F66C70023D7F8 /* NVPasswordGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EEC9FE106F66C70023D7F8 /* NVPasswordGenerator.m */; };
+		EC35E047114AA95700FD6FA4 /* StickyOrdererByPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = EC35E046114AA95700FD6FA4 /* StickyOrdererByPosition.m */; };
+		EC35E04A114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC35E049114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m */; };
+		EC35E04D114AA98000FD6FA4 /* StickyOrdererByTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = EC35E04C114AA98000FD6FA4 /* StickyOrdererByTitle.m */; };
+		EC35E050114AA99C00FD6FA4 /* StickyOrdererByColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EC35E04F114AA99C00FD6FA4 /* StickyOrdererByColor.m */; };
 		ECD5923011467E9A00EA01DE /* AutoMoveCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */; };
 		ECD5923111467E9A00EA01DE /* AutoMoveWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5921F11467E9A00EA01DE /* AutoMoveWindow.m */; };
 		ECD5923211467E9A00EA01DE /* BorderlessView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922111467E9A00EA01DE /* BorderlessView.m */; };
@@ -436,6 +440,14 @@
 		8D1107320486CEB800E47090 /* Notational Velocity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notational Velocity.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3EEC9FE106F66C70023D7F8 /* NVPasswordGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVPasswordGenerator.m; sourceTree = "<group>"; };
 		D3EEC9FF106F66C70023D7F8 /* NVPasswordGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVPasswordGenerator.h; sourceTree = "<group>"; };
+		EC35E045114AA95700FD6FA4 /* StickyOrdererByPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyOrdererByPosition.h; sourceTree = "<group>"; };
+		EC35E046114AA95700FD6FA4 /* StickyOrdererByPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyOrdererByPosition.m; sourceTree = "<group>"; };
+		EC35E048114AA96B00FD6FA4 /* StickyOrdererByCreationDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyOrdererByCreationDate.h; sourceTree = "<group>"; };
+		EC35E049114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyOrdererByCreationDate.m; sourceTree = "<group>"; };
+		EC35E04B114AA98000FD6FA4 /* StickyOrdererByTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyOrdererByTitle.h; sourceTree = "<group>"; };
+		EC35E04C114AA98000FD6FA4 /* StickyOrdererByTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyOrdererByTitle.m; sourceTree = "<group>"; };
+		EC35E04E114AA99C00FD6FA4 /* StickyOrdererByColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyOrdererByColor.h; sourceTree = "<group>"; };
+		EC35E04F114AA99C00FD6FA4 /* StickyOrdererByColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyOrdererByColor.m; sourceTree = "<group>"; };
 		ECD5921C11467E9A00EA01DE /* AutoMoveCentral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMoveCentral.h; sourceTree = "<group>"; };
 		ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoMoveCentral.m; sourceTree = "<group>"; };
 		ECD5921E11467E9A00EA01DE /* AutoMoveWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMoveWindow.h; sourceTree = "<group>"; };
@@ -868,11 +880,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC35E03E114AA8FC00FD6FA4 /* Ordering */ = {
+			isa = PBXGroup;
+			children = (
+				EC35E045114AA95700FD6FA4 /* StickyOrdererByPosition.h */,
+				EC35E046114AA95700FD6FA4 /* StickyOrdererByPosition.m */,
+				EC35E048114AA96B00FD6FA4 /* StickyOrdererByCreationDate.h */,
+				EC35E049114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m */,
+				EC35E04B114AA98000FD6FA4 /* StickyOrdererByTitle.h */,
+				EC35E04C114AA98000FD6FA4 /* StickyOrdererByTitle.m */,
+				EC35E04E114AA99C00FD6FA4 /* StickyOrdererByColor.h */,
+				EC35E04F114AA99C00FD6FA4 /* StickyOrdererByColor.m */,
+			);
+			name = Ordering;
+			sourceTree = "<group>";
+		};
 		ECD5923D11467EC100EA01DE /* Sticky Classes */ = {
 			isa = PBXGroup;
 			children = (
 				ECD5921C11467E9A00EA01DE /* AutoMoveCentral.h */,
 				ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */,
+				EC35E03E114AA8FC00FD6FA4 /* Ordering */,
 				ECD5921E11467E9A00EA01DE /* AutoMoveWindow.h */,
 				ECD5921F11467E9A00EA01DE /* AutoMoveWindow.m */,
 				ECD5922011467E9A00EA01DE /* BorderlessView.h */,
@@ -1097,6 +1125,10 @@
 				ECD5923711467E9A00EA01DE /* StickyControler.m in Sources */,
 				ECD5923811467E9A00EA01DE /* StickyObject.m in Sources */,
 				ECD5923911467E9A00EA01DE /* TextViewForBorderless.m in Sources */,
+				EC35E047114AA95700FD6FA4 /* StickyOrdererByPosition.m in Sources */,
+				EC35E04A114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m in Sources */,
+				EC35E04D114AA98000FD6FA4 /* StickyOrdererByTitle.m in Sources */,
+				EC35E050114AA99C00FD6FA4 /* StickyOrdererByColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

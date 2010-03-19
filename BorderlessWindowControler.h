@@ -70,6 +70,7 @@
 - (void) initWindowWithCentral: (AutoMoveCentral *) central;
 - (void) intiWindowWithCentralAndSetWindowToInitPos: (AutoMoveCentral *) central;
 - (void) textContentDidChange;
+- (BorderlessWindow *) window;
 
 
 

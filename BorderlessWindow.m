@@ -11,6 +11,10 @@
 
 @implementation BorderlessWindow
 
+
+/*
+ * among other things this makes this window borderless
+ */
 - (id) initWithContentRect: (NSRect) contentRect
                  styleMask: (NSUInteger) aStyle
                    backing: (NSBackingStoreType) bufferingType
@@ -53,16 +57,18 @@
 } 
 
 
-
-
-
+/**
+ * returns wether this is minimized (with minimal size . . . not at the dock)
+ */
 - (BOOL) isMimimized {
 	return isMinimized;
 	
 }
 
 
-
+/**
+ * sets this to a minimal position but does NOT put it into the dock
+ */
 - (void) minimize {
 	if (!isMinimized) {
 		isMinimized = YES;
@@ -85,6 +91,9 @@
 	}
 }
 
+/**
+ * sets this back to the size it had before it was minimized
+ */
 - (void) unminimize {
 	
 	if (isMinimized) {
@@ -118,8 +127,11 @@
 
 }
 
+/**
+ * checks wether the mouseDown happened in the dragging or resizing position
+ */
 - (void) doMouseDownWork:(NSPoint) locationInWindow {
-	//NSPoint tmp = [theEvent locationInWindow];
+	
 	initialLocationInWindow = NSMakePoint(locationInWindow.x, locationInWindow.y);
 	
 	
@@ -148,20 +160,9 @@
 		}
 	}
 	
-	/*if (resizeAction || dragAction) {
-		NSCursor *cur = [NSCursor currentCursor];
-		
-		NSPoint p = [cur hotSpot];
-		
-		[cur initWithImage:[[NSCursor closedHandCursor] image] hotSpot:p ];
-		
-	} /* */
-	
 }
 
 - (void)mouseDown:(NSEvent * )theEvent {
-	
-	
 	
 	[self doMouseDownWork:[theEvent locationInWindow]];
 	
@@ -169,14 +170,19 @@
 		[self mouseDownNoWindowAction:theEvent];
 	}
 	
-} /* */
+} 
 
 
-
+/**
+ * returns the width of the space that can be used to resize the window
+ */
 - (int) getResizingSpaceWidth {
 	return resizingSpaceWidth;
 }
 
+/**
+ * returns the height of the space that can be used to resize the window
+ */
 - (int) getResizingSpaceHeight {
 	return resizingSpaceHeight;
 }
@@ -189,16 +195,19 @@
 	NSRect windowFrame = [self frame];
 	NSRect screenFrame = [[NSScreen mainScreen] frame];
 	
-	if (dragAction) {
+	if (dragAction) { 
+		//while mouse down we allready checked that this is in the dragging region
+		
 		int requestedPositionX = currentLocationOnScreen.x - initialLocationInWindow.x;
 		int requestedPositionY = currentLocationOnScreen.y - initialLocationInWindow.y;
 		
+		//set max and min values
 		int maxY = screenFrame.size.height - (windowFrame.size.height + windowToolBarHeight);
 		int minY = draggingSpaceHeight - windowFrame.size.height;
 		int maxX = screenFrame.size.width - (draggingSpaceLeftOffset + draggingSpaceHeight);
 		int minX = (draggingSpaceHeight + draggingSpaceRightOffset) - windowFrame.size.width;
 		
-		
+		// get the new x and y positions
 		if (requestedPositionY > maxY) {
 			requestedPositionY = maxY;
 		}
@@ -215,6 +224,7 @@
 			requestedPositionX = maxX;
 		}
 		
+		// set the new window position
 		NSPoint newOrigin = windowFrame.origin;
 		newOrigin.x = requestedPositionX;
 		newOrigin.y = requestedPositionY;
@@ -225,6 +235,8 @@
 	}
 	else {
 		if (resizeAction) {
+			//during mouse down we allready checked that this happened in the
+			//resizing space
 			
 			float xDif = currentLocationOnScreen.x - initialLocationOnScreen.x;
 			float yDif = initialLocationOnScreen.y - currentLocationOnScreen.y;
@@ -248,27 +260,27 @@
 				newHeight = initialWindowFrame.size.height;
 			}
 			
-			NSRect newFrame = NSMakeRect(initialWindowFrame.origin.x, newY, newWidth, newHeight);
-			//[self setFrame:newFrame display:YES animate:NO];
-			//[self setFrameForDragging:newFrame];
-			
-			
+			NSRect newFrame = NSMakeRect(initialWindowFrame.origin.x, newY, newWidth, newHeight);			
 			
 			[self setFrameNoCall:newFrame display:YES animate:NO];
 		}
 		else {
+			//not dragging and not resizing
 			[self mouseDraggedNoWindowAction:theEvent];
 		}
 	}
 }
 
+ 
 - (void)mouseUp:(NSEvent *)theEvent
 {
 	
+	//double klick in drag region -> minimize
 	if (dragAction && [theEvent clickCount] == 2) {
 		[controler doubleClickInDragRegion];
 	}
 	
+	//reset to "blank" state
 	if (dragAction || resizeAction) {
 		dragAction = NO;
 		resizeAction = NO;
@@ -283,31 +295,41 @@
 	return draggingSpaceHeight;
 }
 
+/**
+ * checks wether the mouse klicked into the dragging region
+ */
 - (BOOL)draggingMode {
 	return initialLocationInWindow.x > draggingSpaceLeftOffset
 		&& initialLocationInWindow.x < (initialWindowFrame.size.width - draggingSpaceRightOffset) 
 		&& initialLocationInWindow.y > initialWindowFrame.size.height - draggingSpaceHeight;
 }
 
+/**
+ * checks wether the mouse klicked into the resizing region
+ */
 - (BOOL)resizingMode {
 	
 	return initialLocationInWindow.x > initialWindowFrame.size.width - resizingSpaceWidth && initialLocationInWindow.y < resizingSpaceHeight;
 }
 
 
-
-/*- (NSRect) transformToVisibleFrame: (NSRect) frame {
-	
-	return NSMakeRect(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - windowToolBarHeight);
-	
-} /* */
-
+/**
+ * invoked when the mouse event did not happen in the dragging or resizing region
+ */
 - (void)mouseDownNoWindowAction:(NSEvent *) theEvent {
 	
 }
+
+/**
+ * invoked when the mouse event did not happen in the dragging or resizing region
+ */
 - (void)mouseDraggedNoWindowAction:(NSEvent *) theEvent {
 	
 }
+
+/**
+ * invoked when the mouse event did not happen in the dragging or resizing region
+ */
 - (void)mouseUpNoWindowAction:(NSEvent *) theEvent {
 	
 	

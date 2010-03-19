@@ -11,27 +11,35 @@
 
 @implementation BorderlessWindowControler
 
+/**
+ * sets the title of the window
+ */
 - (void) setWindowTitle:(NSString *)theTitle {
 	[titleField setStringValue:theTitle];
 	[self refreshWindow];
 }
 
+/**
+ *
+ */
 - (void) windowDidBecomeKey:(NSNotification *) notification {
 	if (notification.object == daWindow) {
 		
-		[self myWindowGainedFocus];
+		[self myWindowGainedFocus]; //set full alpha value...
+		
 		if (!hasFocus) {
-			[daWindow display];
+			[daWindow display]; //...and repaint if necessary
 		}
+		
 		hasFocus = YES;
 	}
 	else {
 		if (hasFocus) {
-			[self myWindowLostFocus];
+			[self myWindowLostFocus]; //set lower alpha value...
 		}
 		
 		if (hasFocus) {
-			[daWindow display];
+			[daWindow display]; //...and repaint if necessary
 		}
 		
 		hasFocus = NO;
@@ -54,30 +62,23 @@
 	[daWindow doMouseDownWork:[daWindow convertScreenToBase:[NSEvent mouseLocation]]];
 }
 
+/**
+ * relays a double klick in the dragging region to the minimize button
+ */ 
 - (void) doubleClickInDragRegion {
 	
 	[minimizeButton performClick:minimizeButton];
-	//[daWindow display];
 
 	
 }
 
+
+/**
+ * relays a minimize invokation the the window
+ */
 - (IBAction)minimizeToggle: (id) sender {
 	[daWindow minimizeToggle];
 	[self refreshWindow];
-	//[daWindow display];
-	
-	/*BOOL minimized = [daWindow isMimimized];
-	BOOL triangleDown = [closeButton state] == NSOnState;
-	
-	
-	if (minimized && triangleDown) {
-		[closeButton setState:NSOnState];
-	}
-	
-	if (!minimized && !triangleDown) {
-		[closeButton setState:NSOnState];
-	}*/
 	
 }
 
@@ -298,6 +299,10 @@
 
 - (BOOL) isMinimized {
 	return [daWindow isMimimized];
+}
+
+- (BorderlessWindow *) window {
+	return daWindow;
 }
 
 @end

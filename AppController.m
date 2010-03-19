@@ -1837,4 +1837,12 @@ terminateApp:
 	[stickyCentral maximizeAll];
 }
 
+- (IBAction)stackWindowsAccordingToColor: (id) sender {
+	[stickyCentral stackWindowsAccordingToColor];
+}
+
+- (IBAction)stackWindowsAccordingToCreationDate: (id) sender {
+	[stickyCentral stackWindowsAccordingToCreationDate];
+}
+
 @end
