@@ -400,7 +400,21 @@ terminateApp:
 		return YES;
 		
 	}
-	else if (selector == @selector(setStickyFloatingToggle:)) {
+	else if (selector == @selector(setStickyFloatingToggle:) ||
+			 selector == @selector(stickiesToggle:) ||
+			 selector == @selector(minimizeAllStickies:) ||
+			 selector == @selector(maximizeAllStickies:)) {
+		NSArray* windows = [stickyCentral focusWindows];
+		
+		if ([windows count] == 0) {
+			return NO;
+		}
+		
+		return YES;
+		
+	}
+	else if (selector == @selector(stickiesToggle:)) {
+		
 		NSArray* windows = [stickyCentral focusWindows];
 		
 		if ([windows count] == 0) {
