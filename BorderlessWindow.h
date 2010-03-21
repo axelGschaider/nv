@@ -62,11 +62,12 @@
 - (void) setMinWindowHeight:(int) min;
 - (void) setMinWindowWidth:(int) min;
 - (void) init:(BorderlessWindowControler *) contr;
+- (void) textContentDidChange;
+
 - (void) minimize;
 - (void) unminimize;
 - (void) minimizeToggle;
 - (BOOL) isMimimized;
-- (void) textContentDidChange;
 
 
 @end

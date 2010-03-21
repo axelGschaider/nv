@@ -379,7 +379,8 @@
 		frame.origin.x = currentLeftX;
 		frame.origin.y = currentUpperHeight - frame.size.height;
 		
-		[win setFrameNoCall:frame display:YES animate:YES];
+		//[win setFrameNoCall:frame display:YES animate:YES];
+		[win setFrameManhattenAnimation:frame];
 		
 		//check if this is the currently highest window in the current line
 		if (frame.size.height > maxWindowHeight) {
@@ -458,7 +459,8 @@
 			frame.origin.y = (screen.origin.y + screen.size.height) - frame.size.height;
 		}
 		
-		[win setFrameNoCall:frame display:YES animate:YES];
+		//[win setFrameNoCall:frame display:YES animate:YES];
+		[win setFrameManhattenAnimation:frame];
 		
 		// check if this is the highest window in the current line
 		if (frame.size.height > maxWindowHeight) {
@@ -514,14 +516,20 @@
 		}
 		
 		//set the new frames position
-		frame.origin.x = currentLeftX;
+		
 		frame.origin.y = currentUpperY - frame.size.height;
 		[win orderFront:self];
 		[win setFrameNoCall:frame display:YES animate:YES];
 		
+		
+		frame = [win frame];
+		
+		frame.origin.x = currentLeftX;
+		[win setFrameNoCall:frame display:YES animate:YES];
+		
 		//itterate for next window
 		//currentLeftX += 15;
-		currentUpperY -= 15;
+		currentUpperY -= 17;
 		
 		
 		

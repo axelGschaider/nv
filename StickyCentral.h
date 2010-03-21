@@ -46,6 +46,7 @@
 - (BOOL) isOpenAsSticky: (NoteObject *)aNote;
 - (BOOL) visibleToggle;
 - (BOOL) stickiesVisible;
+- (BOOL) hasStickies;
 - (void) registerAsFocusWindow: (StickyControler *) controler multipleSelection:(BOOL)mult;
 - (void) unregisterAsFocusWindow: (StickyControler *) controler;
 - (NSMutableArray*) focusWindows;
@@ -57,5 +58,6 @@
 
 - (void) stackWindowsAccordingToColor;
 - (void) stackWindowsAccordingToCreationDate;
+- (void) stackWindowsAccordingToTitle;
 
 @end

@@ -130,6 +130,7 @@ void outletObjectAwoke(id sender);
 - (IBAction)stackWindowsInCurrentOrder:(id) sender;
 - (IBAction)stackWindowsAccordingToColor: (id) sender;
 - (IBAction)stackWindowsAccordingToCreationDate: (id) sender;
+- (IBAction)stackWindowsAccordingToTitle: (id) sender;
 - (IBAction)minimizeAllStickies: (id) sender;
 - (IBAction)maximizeAllStickies: (id) sender;
 - (void) updateStickyMenus;

@@ -122,8 +122,8 @@
 	//NSInteger comp = (*)->createdDate - (*(NoteObject**)b)->createdDate;
 	
 	//int comp = [[first note] ] - [[second note]->createdDate];
+	return (createdDateOfNote([first note])) < (createdDateOfNote([second note]));
 	
-	return YES;
 	
 }
 

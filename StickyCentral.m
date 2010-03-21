@@ -313,6 +313,9 @@
 		
 		if (![[sticky controler] isMinimized]) {
 			[[sticky controler] minimizeToggle:self];
+			
+			//[NSThread detachNewThreadSelector:@selector(minimizeToggle:) toTarget:[sticky controler] withObject:self];
+			
 		}
 		
 	}
@@ -359,8 +362,20 @@
 	
 }
 
+- (void) stackWindowsAccordingToTitle {
+	StickyOrdererByTitle * orderer = [[StickyOrdererByTitle alloc] init];
+	
+	windows = [orderer sortTheWindows:stickies];
+	
+	[self stackWindowsInCurrentOrder];
+}
+
 - (BOOL) stickiesVisible {
 	return visible;
+}
+
+- (BOOL) hasStickies {
+	return [stickies count] > 0;
 }
 
 

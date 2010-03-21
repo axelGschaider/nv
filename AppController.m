@@ -401,7 +401,6 @@ terminateApp:
 		
 	}
 	else if (selector == @selector(setStickyFloatingToggle:) ||
-			 selector == @selector(stickiesToggle:) ||
 			 selector == @selector(minimizeAllStickies:) ||
 			 selector == @selector(maximizeAllStickies:)) {
 		NSArray* windows = [stickyCentral focusWindows];
@@ -415,15 +414,10 @@ terminateApp:
 	}
 	else if (selector == @selector(stickiesToggle:)) {
 		
-		NSArray* windows = [stickyCentral focusWindows];
-		
-		if ([windows count] == 0) {
-			return NO;
-		}
-		
-		return YES;
+		return [stickyCentral hasStickies];
 		
 	}
+	
 	
 	return YES;
 }
@@ -1875,5 +1869,10 @@ terminateApp:
 - (IBAction)stackWindowsAccordingToCreationDate: (id) sender {
 	[stickyCentral stackWindowsAccordingToCreationDate];
 }
+
+- (IBAction)stackWindowsAccordingToTitle: (id) sender {
+	[stickyCentral stackWindowsAccordingToTitle];
+}
+
 
 @end

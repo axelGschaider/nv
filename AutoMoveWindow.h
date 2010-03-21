@@ -23,6 +23,11 @@
 - (void)setFrameNoCall:(NSRect)windowFrame display:(BOOL)displayViews animate:(BOOL)performAnimation;
 - (void)setFrameOriginNoCall:(NSPoint)aPoint;
 - (void)setFrameForDragging:(NSRect) aPoint;
+- (void)setFrameManhattenAnimation:(NSRect) windowFrame;
+- (void)setFrameManhattenAnimation:(NSRect) windowFrame min:(BOOL)minimize ifMinKeepLeft:(BOOL)keepLeft ifMinKeepBottom:(BOOL)keepBottom;
+- (void)minimizeWork;
+- (int) minWidthPreview;
+- (int) minHeightPreview;
 - (NSRect) getUsableScreen;
 
 @end

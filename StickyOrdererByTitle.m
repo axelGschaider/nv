@@ -125,42 +125,11 @@
 
 - (BOOL) firstOneSmaller: (StickyObject *) first secondObject:(StickyObject *) second {
 	
-	int firstColorCode = -1;
-	int secondColorCode = -1;
+	NSString * firstT = titleOfNote([first note]);
+	NSString *  secondT = titleOfNote( [second note]);
 	
-	StickyControler * contr = [first controler];
+	return [firstT compare:secondT] == NSOrderedAscending;
 	
-	if ([contr isBlue]) {
-		firstColorCode = 0;
-	} else if ([contr isGreen]) {
-		firstColorCode = 1;
-	} else if ([contr isGrey]) {
-		firstColorCode = 2;
-	} else if ([contr isPink]) {
-		firstColorCode = 3;
-	} else if ([contr isViolet]) {
-		firstColorCode = 4;
-	} else {
-		firstColorCode = 5;
-	}
-	
-	contr = [second controler];
-	
-	if ([contr isBlue]) {
-		secondColorCode = 0;
-	} else if ([contr isGreen]) {
-		secondColorCode = 1;
-	} else if ([contr isGrey]) {
-		secondColorCode = 2;
-	} else if ([contr isPink]) {
-		secondColorCode = 3;
-	} else if ([contr isViolet]) {
-		secondColorCode = 4;
-	} else {
-		secondColorCode = 5;
-	}
-	
-	return (firstColorCode < secondColorCode);
 	
 }
 
