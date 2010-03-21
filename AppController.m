@@ -1172,6 +1172,7 @@ terminateApp:
 			//restore string
 			newStorage = [[NSTextStorage alloc] init];
 			[newStorage setAttributedString:[note contentString]];
+			[newStorage retain];
 			
 			
 			//[[textView textStorage] setAttributedString:[note contentString]];
@@ -1180,10 +1181,11 @@ terminateApp:
 		
 		NSLayoutManager * manager = [textView layoutManager];
 		[oldStorage removeLayoutManager:manager];
+		[oldStorage release];
 		
-		if ([[oldStorage layoutManagers] count] == 0) {
+		/*if ([[oldStorage layoutManagers] count] == 0) {
 			[oldStorage release];
-		}
+		} /* */
 		
 		[newStorage addLayoutManager:manager];
 		
@@ -1724,6 +1726,21 @@ terminateApp:
 	else {
 		[opaqueItem setState:NSOnState];
 	}
+	
+	menuIndex = [stickiesMenu indexOfItemWithTarget:self andAction:@selector(stickiesToggle:)];
+	NSMenuItem *hideItem = nil;
+	
+	if (menuIndex > -1) {
+		hideItem = [stickiesMenu itemAtIndex:menuIndex];
+	}
+	
+	if ([stickyCentral stickiesVisible]) {
+		[hideItem setState:NSOffState];
+	}
+	else {
+		[hideItem setState:NSOnState];
+	}
+
 	
 	
 }

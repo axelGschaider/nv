@@ -282,6 +282,8 @@
 }
 
 - (void) setVisible:(BOOL) vis {
+	
+	
 	if (vis) {
 		[daWindow makeKeyAndOrderFront:self];
 	}

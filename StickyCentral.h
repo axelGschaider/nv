@@ -45,6 +45,7 @@
 - (void) removeStickyWithNote: (NoteObject *)note;
 - (BOOL) isOpenAsSticky: (NoteObject *)aNote;
 - (BOOL) visibleToggle;
+- (BOOL) stickiesVisible;
 - (void) registerAsFocusWindow: (StickyControler *) controler multipleSelection:(BOOL)mult;
 - (void) unregisterAsFocusWindow: (StickyControler *) controler;
 - (NSMutableArray*) focusWindows;

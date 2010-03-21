@@ -128,16 +128,21 @@
 - (BOOL) visibleToggle {
 	visible = !visible;
 	
-	int count = [windows count];
+	NSLog(@"in Central");
+	
+	int count = [stickies count];
 	
 	while (count--) {
-		id obj = [windows objectAtIndex:count];
+		id obj = [stickies objectAtIndex:count];
 		
 		StickyObject *s = obj;
+		
 		
 		[[s controler] setVisible:visible];
 		
 	}
+	
+	[appControler updateStickyStates];
 	
 	return visible;
 	
@@ -354,6 +359,9 @@
 	
 }
 
+- (BOOL) stickiesVisible {
+	return visible;
+}
 
 
 @end
