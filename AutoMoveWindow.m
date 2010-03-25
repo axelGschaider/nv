@@ -130,31 +130,23 @@
 	[super setFrameOrigin:aPoint];
 }
 
-- (void)setFrameManhattenAnimation:(NSRect)windowFrame {
-	[self setFrameManhattenAnimation:windowFrame min:NO ifMinKeepLeft:NO ifMinKeepBottom:NO];
+/*- (void)setFrameManhattenAnimation:(NSRect)windowFrame {
+	NSRect f = [self frame];
+	
+	f.origin.y = windowFrame.origin.y;
+	
+	[super setFrame: f display:YES animate:YES];
+	
+	[super setFrame:windowFrame display:YES animate:YES];
+	
+	return;
 }
 
-- (void)setFrameManhattenAnimation:(NSRect)windowFrame 
-							   min:(BOOL)minimize 
-					 ifMinKeepLeft:(BOOL)keepLeft 
-				   ifMinKeepBottom:(BOOL)keepBottom {
-	
-	if (!minimize) {
-		
-		NSRect f = [self frame];
-		
-		f.origin.y = windowFrame.origin.y;
-		
-		[super setFrame: f display:YES animate:YES];
-		
-		[super setFrame:windowFrame display:YES animate:YES];
-		
-		return;
-	}
-	
-	
-	
-}
+- (void)setFrameManhattenAnimationWithWrapper:(FrameWrapper *)windowFrame {
+	[self setFrameManhattenAnimation:[windowFrame frame]];
+} /* */
+
+
 
 - (void)minimizeWork {
 	
@@ -170,6 +162,10 @@
 	NSRect f = [self frame];
 	
 	return f.size.height;
+}
+
+- (NSTimeInterval)animationResizeTime:(NSRect)newWindowFrame {
+	return 0.3;
 }
 
 @end

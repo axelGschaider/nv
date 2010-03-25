@@ -160,6 +160,7 @@
 		EC35E04A114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC35E049114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m */; };
 		EC35E04D114AA98000FD6FA4 /* StickyOrdererByTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = EC35E04C114AA98000FD6FA4 /* StickyOrdererByTitle.m */; };
 		EC35E050114AA99C00FD6FA4 /* StickyOrdererByColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EC35E04F114AA99C00FD6FA4 /* StickyOrdererByColor.m */; };
+		EC7A3542115ABAB600FA6E6D /* ManhattenAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3541115ABAB600FA6E6D /* ManhattenAnimator.m */; };
 		ECD5923011467E9A00EA01DE /* AutoMoveCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */; };
 		ECD5923111467E9A00EA01DE /* AutoMoveWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5921F11467E9A00EA01DE /* AutoMoveWindow.m */; };
 		ECD5923211467E9A00EA01DE /* BorderlessView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD5922111467E9A00EA01DE /* BorderlessView.m */; };
@@ -448,6 +449,8 @@
 		EC35E04C114AA98000FD6FA4 /* StickyOrdererByTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyOrdererByTitle.m; sourceTree = "<group>"; };
 		EC35E04E114AA99C00FD6FA4 /* StickyOrdererByColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyOrdererByColor.h; sourceTree = "<group>"; };
 		EC35E04F114AA99C00FD6FA4 /* StickyOrdererByColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyOrdererByColor.m; sourceTree = "<group>"; };
+		EC7A3540115ABAB600FA6E6D /* ManhattenAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManhattenAnimator.h; sourceTree = "<group>"; };
+		EC7A3541115ABAB600FA6E6D /* ManhattenAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManhattenAnimator.m; sourceTree = "<group>"; };
 		ECD5921C11467E9A00EA01DE /* AutoMoveCentral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMoveCentral.h; sourceTree = "<group>"; };
 		ECD5921D11467E9A00EA01DE /* AutoMoveCentral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoMoveCentral.m; sourceTree = "<group>"; };
 		ECD5921E11467E9A00EA01DE /* AutoMoveWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMoveWindow.h; sourceTree = "<group>"; };
@@ -917,6 +920,8 @@
 				ECD5922B11467E9A00EA01DE /* StickyControler.m */,
 				ECD5922C11467E9A00EA01DE /* StickyObject.h */,
 				ECD5922D11467E9A00EA01DE /* StickyObject.m */,
+				EC7A3540115ABAB600FA6E6D /* ManhattenAnimator.h */,
+				EC7A3541115ABAB600FA6E6D /* ManhattenAnimator.m */,
 				ECD5922E11467E9A00EA01DE /* TextViewForBorderless.h */,
 				ECD5922F11467E9A00EA01DE /* TextViewForBorderless.m */,
 			);
@@ -1129,6 +1134,7 @@
 				EC35E04A114AA96B00FD6FA4 /* StickyOrdererByCreationDate.m in Sources */,
 				EC35E04D114AA98000FD6FA4 /* StickyOrdererByTitle.m in Sources */,
 				EC35E050114AA99C00FD6FA4 /* StickyOrdererByColor.m in Sources */,
+				EC7A3542115ABAB600FA6E6D /* ManhattenAnimator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

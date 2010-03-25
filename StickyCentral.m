@@ -312,9 +312,9 @@
 	while ((sticky = [enu nextObject])) {
 		
 		if (![[sticky controler] isMinimized]) {
-			[[sticky controler] minimizeToggle:self];
+			[[sticky controler] doubleClickInDragRegion];
 			
-			//[NSThread detachNewThreadSelector:@selector(minimizeToggle:) toTarget:[sticky controler] withObject:self];
+			//[NSThread detachNewThreadSelector:@selector(doubleClickInDragRegion) toTarget:[sticky controler] withObject:nil];
 			
 		}
 		
@@ -333,7 +333,7 @@
 	while ((sticky = [enu nextObject])) {
 		
 		if ([[sticky controler] isMinimized]) {
-			[[sticky controler] minimizeToggle:self];
+			[[sticky controler] doubleClickInDragRegion];
 		}
 		
 	}

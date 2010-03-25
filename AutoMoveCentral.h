@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AutoMoveWindow.h"
+#import "ManhattenAnimator.h"
 
 @class AutoMoveWindow;
 

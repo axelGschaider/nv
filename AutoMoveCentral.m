@@ -341,6 +341,8 @@
 	int maxRightX = screen.origin.x + screen.size.width;//xStart + screen.size.height;
 	int currentLeftX = xStart;
 	
+	ManhattenAnimator * animator = [[ManhattenAnimator alloc] init];
+	
 	
 	int daIndex = 0;
 	
@@ -380,7 +382,9 @@
 		frame.origin.y = currentUpperHeight - frame.size.height;
 		
 		//[win setFrameNoCall:frame display:YES animate:YES];
-		[win setFrameManhattenAnimation:frame];
+		// AXELS_TODO [win setFrameManhattenAnimation:frame];
+		[animator registerForAnimation:win withEndFrame:frame];
+		
 		
 		//check if this is the currently highest window in the current line
 		if (frame.size.height > maxWindowHeight) {
@@ -391,6 +395,8 @@
 		currentLeftX = currentLeftX + frame.size.width;
 		
 	}
+	
+	[animator animateAll];
 	
 }
 
@@ -415,6 +421,8 @@
 	int currentLeftX = xStart;
 	
 	int daIndex = 0;
+	
+	ManhattenAnimator * animator = [[ManhattenAnimator alloc] init];
 	
 	
 	// for all windows ...
@@ -460,7 +468,8 @@
 		}
 		
 		//[win setFrameNoCall:frame display:YES animate:YES];
-		[win setFrameManhattenAnimation:frame];
+		// AXELS_TODO [win setFrameManhattenAnimation:frame];
+		[animator registerForAnimation:win withEndFrame:frame];
 		
 		// check if this is the highest window in the current line
 		if (frame.size.height > maxWindowHeight) {
@@ -471,6 +480,8 @@
 		currentLeftX = currentLeftX + frame.size.width;
 		
 	}
+	
+	[animator animateAll];
 	
 }
 
@@ -497,6 +508,8 @@
 	int currentLeftX = xStart;
 	int currentUpperY = maxY;
 	
+	ManhattenAnimator * animator = [[ManhattenAnimator alloc] init];
+	
 	// for every window
 	while (daIndex < count) {
 		AutoMoveWindow * win = [windows objectAtIndex:daIndex];
@@ -518,14 +531,24 @@
 		//set the new frames position
 		
 		frame.origin.y = currentUpperY - frame.size.height;
+		frame.origin.x = currentLeftX;
 		[win orderFront:self];
-		[win setFrameNoCall:frame display:YES animate:YES];
+		/*[win setFrameNoCall:frame display:YES animate:YES];
 		
 		
 		frame = [win frame];
 		
 		frame.origin.x = currentLeftX;
-		[win setFrameNoCall:frame display:YES animate:YES];
+		[win setFrameNoCall:frame display:YES animate:YES];*/
+		
+		
+		// AXELS_TODO [win setFrameManhattenAnimation:frame];
+		[animator registerForAnimation:win withEndFrame:frame];
+		
+		/*FrameWrapper * wr = [[FrameWrapper alloc]init];
+		[wr setFrame:frame];
+		[NSThread detachNewThreadSelector:@selector(setFrameManhattenAnimationWithWrapper:) toTarget:win withObject:wr];
+		/* */
 		
 		//itterate for next window
 		//currentLeftX += 15;
@@ -535,6 +558,7 @@
 		
 	}
 	
+	[animator animateAll];
 	
 }
 
