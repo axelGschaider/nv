@@ -85,7 +85,27 @@
 		
 		NSRect newFrame = NSMakeRect(x, y, width, height);
 		
-		[self setFrameNoCall:newFrame display:YES animate:YES];
+		//[self setFrameNoCall:newFrame display:YES animate:YES];
+		
+		
+		if ([self isVisible]) {
+			NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:3];
+			
+			[dict setObject:self forKey:NSViewAnimationTargetKey];
+			[dict setObject:[NSValue valueWithRect:currentFrame] forKey:NSViewAnimationStartFrameKey];
+			[dict setObject:[NSValue valueWithRect:newFrame] forKey:NSViewAnimationEndFrameKey];
+			
+			NSViewAnimation * anim = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:dict, nil]];
+			
+			[anim autorelease];
+			[anim setDuration:0.3];
+			[anim setAnimationCurve:NSAnimationEaseIn];
+			[anim startAnimation];
+		}
+		else {
+			[self setFrameNoCall:newFrame display:YES animate:NO];
+		}
+
 		
 		
 	}
@@ -110,8 +130,25 @@
 		
 		NSRect newFrame = NSMakeRect(x, y, width, height);
 		
-		[self setFrameNoCall:newFrame display:YES animate:YES];
+		//[self setFrameNoCall:newFrame display:YES animate:YES];
 		
+		if ([self isVisible]) {
+			NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:3];
+			
+			[dict setObject:self forKey:NSViewAnimationTargetKey];
+			[dict setObject:[NSValue valueWithRect:currentFrame] forKey:NSViewAnimationStartFrameKey];
+			[dict setObject:[NSValue valueWithRect:newFrame] forKey:NSViewAnimationEndFrameKey];
+			
+			NSViewAnimation * anim = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:dict, nil]];
+			
+			[anim autorelease];
+			[anim setDuration:0.3];
+			[anim setAnimationCurve:NSAnimationEaseIn];
+			[anim startAnimation];
+		}
+		else {
+			[self setFrameNoCall:newFrame display:YES animate:NO];
+		}
 	}
 	
 }
