@@ -46,7 +46,7 @@
 	
 	int clip = 14;
 	
-	NSRect screenFrame = [window getUsableScreen];
+	NSRect screenFrame = [[NSScreen mainScreen] visibleFrame];//[window getUsableScreen];
 	
 	int x = frame.origin.x;
 	int y = frame.origin.y;
@@ -251,14 +251,18 @@
 - (void)setInitialPosition:(AutoMoveWindow *) window {
 	
 	
-	int screenHeight = [window getUsableScreen].size.height;
-	int screenWidth = [window getUsableScreen].size.width;
+	NSRect visibleScreen = [[NSScreen mainScreen] visibleFrame];
+	
+	int screenHeight = visibleScreen.size.height + visibleScreen.origin.y;
+	int screenWidth = visibleScreen.size.width + visibleScreen.origin.x;
+	int screenLeftStart = visibleScreen.origin.x;
+	int screenLowerStart = visibleScreen.origin.y;
 	int windowHeight = [window frame].size.height;
 	
 	NSRect frame = [window frame];
 	
-	int startX = 30;
-	int startY = screenHeight - (windowHeight + 30);
+	int startX = screenLeftStart;
+	int startY = screenHeight - windowHeight;
 	
 	frame.origin.x = startX;
 	frame.origin.y = startY;
@@ -268,8 +272,8 @@
 	
 	while (iterateX < (screenWidth - 30)) {
 		
-		if (iterateY < 0) {
-			startX += 60;
+		if (iterateY < screenLowerStart) {
+			startX += 100;
 			iterateX = startX;
 			iterateY = startY;
 		}
@@ -279,8 +283,8 @@
 		[window setFrameNoCall:frame display:NO animate:NO];
 		
 		if ([self isAnyBodyAtThisPosition:window]) {
-			iterateX += 60;
-			iterateY -= 60;
+			iterateX += 30;
+			iterateY -= 30;
 		}
 		else {
 			return;
@@ -333,9 +337,9 @@
 	
 	AutoMoveWindow * win = [windows objectAtIndex:0];
 	
-	NSRect screen = [win getUsableScreen];
+	NSRect screen = [[NSScreen mainScreen]visibleFrame];//[win getUsableScreen];
 	
-	int currentUpperHeight = screen.size.height;
+	int currentUpperHeight = screen.size.height + screen.origin.y;
 	int maxWindowHeight = 0;
 	int xStart = screen.origin.x;
 	int maxRightX = screen.origin.x + screen.size.width;//xStart + screen.size.height;
@@ -412,7 +416,7 @@
 		return;
 	}
 	
-	NSRect screen = [[windows objectAtIndex:0] getUsableScreen];
+	NSRect screen = [[NSScreen mainScreen]visibleFrame];//[[windows objectAtIndex:0] getUsableScreen];
 	
 	int currentLowerY = screen.origin.y;
 	int maxWindowHeight = 0;
@@ -494,7 +498,7 @@
 		return;
 	}
 	
-	NSRect screen = [[windows objectAtIndex:0] getUsableScreen];
+	NSRect screen = [[NSScreen mainScreen]visibleFrame];//[[windows objectAtIndex:0] getUsableScreen];
 	
 	int daIndex = 0;
 	

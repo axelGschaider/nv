@@ -107,13 +107,15 @@
 
 /**
  * returns the usable screen (excluding the menu bar and in the future the dock)
- */
+ 
 - (NSRect) getUsableScreen {
-	NSRect f = [[NSScreen mainScreen] frame];
+	//NSRect f = [[NSScreen mainScreen] frame];
 	
-	return NSMakeRect(f.origin.x, f.origin.y, f.size.width, f.size.height - 21);
+	//return NSMakeRect(f.origin.x, f.origin.y, f.size.width, f.size.height - 21);
 	
-}
+	return [[NSScreen mainScreen] visibleFrame];
+	
+}*/
 
 
 /**

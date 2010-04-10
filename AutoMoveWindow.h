@@ -26,6 +26,6 @@
 - (void)minimizeWork;
 - (int) minWidthPreview;
 - (int) minHeightPreview;
-- (NSRect) getUsableScreen;
+//- (NSRect) getUsableScreen;
 
 @end

@@ -162,11 +162,15 @@
 }
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
-    return NSDragOperationNone;
+    
+	
+	
+	return NSDragOperationNone;
 }
 
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender {
-	return NSDragOperationCopy;
+	
+	return (NSDragOperationCopy) ;
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
@@ -176,6 +180,7 @@
 		
 	return [[NSApp delegate] addNotesFromPasteboard:[sender draggingPasteboard]];
 }
+
 
 - (void)paste:(id)sender {
 	[[NSApp delegate] addNotesFromPasteboard:[NSPasteboard generalPasteboard]];
@@ -632,8 +637,10 @@
 
 
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal {
-	return isLocal ? NSDragOperationNone : NSDragOperationCopy;
+	return isLocal ? NSDragOperationNone :  NSDragOperationCopy;
 }
+
+
 
 - (void)mouseDown:(NSEvent*)event {
 	
