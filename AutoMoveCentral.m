@@ -335,7 +335,7 @@
 		return;
 	}
 	
-	AutoMoveWindow * win = [windows objectAtIndex:0];
+	AutoMoveWindow * win = nil;
 	
 	NSRect screen = [[NSScreen mainScreen]visibleFrame];//[win getUsableScreen];
 	
@@ -491,6 +491,84 @@
 	
 }
 
+- (void) moveAllToRight {
+	
+	int count = [windows count];
+	
+	if (count == 0) {
+		return;
+	}
+	
+	//AutoMoveWindow * win = nil;
+	
+	NSRect screen = [[NSScreen mainScreen]visibleFrame];
+	
+	int screenHeight = screen.size.height + screen.origin.y;
+	int minLeftX = screen.origin.x;
+	int minLowerY = screen.origin.y;
+	int maxWindowWidth = 0;
+	int currentUpperY = screenHeight;
+	int xStart = screen.size.width + screen.origin.x;
+	int currentRightX = xStart;
+	
+	ManhattenAnimator * animator = [[ManhattenAnimator alloc] init];
+	int daIndex = 0;
+	
+	while (daIndex < count) {
+		AutoMoveWindow * win = [windows objectAtIndex:daIndex];
+		daIndex++;
+		
+		NSRect frame = [win frame];
+		
+		//if the current window is to high for the rest of the collumn
+		if (currentUpperY - frame.size.height <= minLowerY) {
+			
+			//one column to the left
+			currentRightX -= maxWindowWidth;
+			
+			currentUpperY = screenHeight;
+			
+			maxWindowWidth = 0;
+		}
+		
+		//this window would hit the left border . . . 
+		if ( currentRightX - frame.size.width < minLeftX) {
+			
+			xStart -= 30;
+			
+			if (xStart <= (screen.size.width + screen.origin.x) - 100) {
+				xStart = screen.size.width + screen.origin.x;
+			}
+			
+			currentRightX = xStart;
+			currentUpperY = screenHeight;
+			maxWindowWidth = 0;
+			
+		}
+		
+		//set new window position
+		frame.origin.x = currentRightX - frame.size.width;
+		frame.origin.y = currentUpperY - frame.size.height;
+		
+		[animator registerForAnimation:win withEndFrame:frame];
+		
+		if (frame.size.width > maxWindowWidth) {
+			maxWindowWidth = frame.size.width;
+		}
+		
+		//itterate y position
+		currentUpperY -= frame.size.height + 1;
+		
+	}
+	
+	[animator animateAll];
+	
+}
+
+- (void) moveAllToLeft {
+	
+}
+
 // stacks the windows in the current order
 - (void) stackWindowsInCurrentOrder {
 	
@@ -558,7 +636,7 @@
 		
 		//itterate for next window
 		//currentLeftX += 15;
-		currentUpperY -= 17;
+		currentUpperY -= 18;
 		
 		
 		

@@ -1849,6 +1849,10 @@ terminateApp:
 	[stickyCentral moveAllToBottom];
 }
 
+- (IBAction)moveStickiesToRight: (id) sender {
+	[stickyCentral moveAllToRight];
+}
+
 - (IBAction)stackWindowsInCurrentOrder:(id) sender {
 	[stickyCentral stackWindowsInCurrentOrder];
 }
