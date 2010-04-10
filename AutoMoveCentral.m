@@ -508,7 +508,7 @@
 	int minLowerY = screen.origin.y;
 	int maxWindowWidth = 0;
 	int currentUpperY = screenHeight;
-	int xStart = screen.size.width + screen.origin.x;
+	int xStart = screen.origin.x;
 	int currentRightX = xStart;
 	
 	ManhattenAnimator * animator = [[ManhattenAnimator alloc] init];
@@ -566,6 +566,72 @@
 }
 
 - (void) moveAllToLeft {
+	
+	int count = [windows count];
+	
+	if (count == 0) {
+		return;
+	}
+	
+	NSRect screen = [[NSScreen mainScreen]visibleFrame];
+	
+	int screenHeight = screen.size.height + screen.origin.y;
+	int maxRightX = screen.size.width + screen.origin.x;
+	int minLowerY = screen.origin.y;
+	int maxWindowWidth = 0;
+	int currentUpperY = screenHeight;
+	int xStart = screen.origin.x;
+	int currentLeftX = xStart;
+	
+	ManhattenAnimator * animator = [[ManhattenAnimator alloc] init];
+	int daIndex = 0;
+	
+	while (daIndex < count) {
+		AutoMoveWindow * win = [windows objectAtIndex:daIndex];
+		daIndex++;
+		
+		NSRect frame = [win frame];
+		
+		//if current window is to high for the rest of the collumn
+		if (currentUpperY - frame.size.height <= minLowerY) {
+			
+			//one column to to the right and up
+			currentLeftX += maxWindowWidth;
+			currentUpperY = screenHeight;
+			maxWindowWidth = 0;
+			
+		}
+		
+		//if this window would hit the right border
+		if (currentLeftX + frame.size.width >= maxRightX) {
+			xStart += 30;
+			
+			if (xStart >= screen.origin.x + 100) {
+				xStart = screen.origin.x;
+			}
+			
+			currentLeftX = xStart;
+			currentUpperY = screenHeight;
+			maxWindowWidth = 0;
+			
+		}
+		
+		//set new window position
+		frame.origin.x = currentLeftX;
+		frame.origin.y = currentUpperY - frame.size.height;
+		
+		[animator registerForAnimation:win withEndFrame:frame];
+		
+		if (frame.size.width > maxWindowWidth) {
+			maxWindowWidth = frame.size.width;
+		}
+		
+		//itterate y positon
+		currentUpperY -= frame.size.height + 1;
+		
+	}
+	
+	[animator animateAll];
 	
 }
 

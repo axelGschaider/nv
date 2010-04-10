@@ -128,6 +128,7 @@ void outletObjectAwoke(id sender);
 - (IBAction)moveStickiesToTop:(id)sender;
 - (IBAction)moveStickiesToBottom:(id) sender;
 - (IBAction)moveStickiesToRight: (id) sender;
+- (IBAction)moveStickiesToLeft: (id) sender;
 - (IBAction)stackWindowsInCurrentOrder:(id) sender;
 - (IBAction)stackWindowsAccordingToColor: (id) sender;
 - (IBAction)stackWindowsAccordingToCreationDate: (id) sender;

@@ -1853,6 +1853,10 @@ terminateApp:
 	[stickyCentral moveAllToRight];
 }
 
+- (IBAction)moveStickiesToLeft: (id) sender {
+	[stickyCentral moveAllToLeft];
+}
+
 - (IBAction)stackWindowsInCurrentOrder:(id) sender {
 	[stickyCentral stackWindowsInCurrentOrder];
 }
