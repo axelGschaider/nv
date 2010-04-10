@@ -339,7 +339,9 @@
 	
 	NSRect screen = [[NSScreen mainScreen]visibleFrame];//[win getUsableScreen];
 	
-	int currentUpperHeight = screen.size.height + screen.origin.y;
+	
+	int screenHight = screen.size.height + screen.origin.y;
+	int currentUpperHeight = screenHight;
 	int maxWindowHeight = 0;
 	int xStart = screen.origin.x;
 	int maxRightX = screen.origin.x + screen.size.width;//xStart + screen.size.height;
@@ -366,8 +368,8 @@
 			
 			//if we have almost reached the bottom of the screen, jump back to
 			//top and start again from a little x-offset
-			if (currentUpperHeight <= 20) {
-				currentUpperHeight = screen.size.height;
+			if (currentUpperHeight - frame.size.height <= screen.origin.y) {
+				currentUpperHeight = screenHight;
 				
 				xStart = xStart + 20;
 				if (xStart >= 100) {
