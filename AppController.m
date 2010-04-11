@@ -1642,13 +1642,15 @@ terminateApp:
 			
 			if (note == currentNote) {
 				NSTextStorage *storage = [[textView layoutManager] textStorage];
-				[stickyCentral openStickyWithNote:note textStorage:storage];
+				[stickyCentral openStickyWithNoteWithoutShowing:note textStorage:storage];
 			}
 			else {
-				[stickyCentral openStickyWithNote:note];
+				[stickyCentral openStickyWithNoteWithoutShowing:note];
 			}
 			
 		}
+		
+		[stickyCentral showNewStickies];
 		
 		
 	}

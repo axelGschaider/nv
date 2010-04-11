@@ -14,7 +14,7 @@
 /**
  * opens a new Sticky note
  */
-- (void) openStickyWithNote:(NoteObject *)note textStorage:(NSTextStorage *)storage {
+- (void) openStickyWithNoteWithoutShowing:(NoteObject *)note textStorage:(NSTextStorage *)storage {
 	
 		
 	int count = [stickies count];
@@ -45,20 +45,35 @@
 		[controler setNoteObject:note textStorage:storage];
 
 		[controler setYellow];
-		[controler showWindow:self];
+		//[controler showWindow:self];
+		[newStickies addObject:controler];
 	}
 	
 }
 
 
-- (void) openStickyWithNote:(NoteObject *)note {
+- (void) openStickyWithNoteWithoutShowing:(NoteObject *)note {
 	
 	if (!visible) {
 		[self visibleToggle];
 	}
 	
-	[self openStickyWithNote:note textStorage:nil];
+	[self openStickyWithNoteWithoutShowing:note textStorage:nil];
 
+}
+
+- (void) showNewStickies {
+	int count = [newStickies count];
+	int daIndex = 0;
+	
+	while (daIndex < count) {
+		StickyControler * contr = [newStickies objectAtIndex:daIndex];
+		daIndex++;
+		[contr showWindow:self];
+	}
+	
+	[newStickies removeAllObjects];
+	
 }
 
 
@@ -70,6 +85,7 @@
 	visible = YES;
 	focusWindows = [[NSMutableArray alloc] init];
 	focusWindowsFallback = [[NSMutableArray alloc] init];
+	newStickies = [[NSMutableArray alloc] init];
 	return [super init];
 }
 

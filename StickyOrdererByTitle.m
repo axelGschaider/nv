@@ -128,7 +128,7 @@
 	NSString * firstT = titleOfNote([first note]);
 	NSString *  secondT = titleOfNote( [second note]);
 	
-	return [firstT compare:secondT] == NSOrderedAscending;
+	return [firstT caseInsensitiveCompare:secondT] == NSOrderedAscending;
 	
 	
 }

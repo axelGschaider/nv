@@ -35,12 +35,14 @@
 	BOOL visible;
 	NSMutableArray *focusWindows;
 	NSMutableArray * focusWindowsFallback;
+	NSMutableArray * newStickies;
 	
 }
 
 - (id) initWithTableView: (NotesTableView *) tableView contr:(AppController *)aControler;
-- (void) openStickyWithNote: (NoteObject *) note;
-- (void) openStickyWithNote:(NoteObject *)note textStorage:(NSTextStorage *)storage;
+- (void) openStickyWithNoteWithoutShowing: (NoteObject *) note;
+- (void) openStickyWithNoteWithoutShowing:(NoteObject *)note textStorage:(NSTextStorage *)storage;
+- (void) showNewStickies;
 - (NSTextStorage *) textStorageForNote: (NoteObject *) aNote;
 - (void) removeStickyWithNote: (NoteObject *)note;
 - (BOOL) isOpenAsSticky: (NoteObject *)aNote;
