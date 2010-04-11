@@ -225,22 +225,23 @@
 	[daWindow makeKeyAndOrderFront:self];
 	[daWindow unminimize];*/
 	
-	NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:3];
+	NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:2];
 	
-	NSRect end = [daWindow frame];
-	NSPoint start = NSMakePoint(-400, -400);
+	//NSRect end = [daWindow frame];
+	//NSPoint start = NSMakePoint(-400, -400);
 	
 	//[daWindow setFrameNoCall:start display:NO animate:NO];
-	[daWindow setFrameOrigin:start];
+	//[daWindow setFrameOrigin:start];
 	
 	[dict setObject:daWindow forKey:NSViewAnimationTargetKey];
 	[dict setObject:NSViewAnimationFadeInEffect forKey:NSViewAnimationEffectKey];
-	[dict setObject: [NSValue valueWithRect:end] forKey:NSViewAnimationEndFrameKey];
+	//[dict setObject: [NSValue valueWithRect:end] forKey:NSViewAnimationEndFrameKey];
 	
 	NSViewAnimation * anim = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:dict,nil]];
 	[anim setDuration: 0.8];
 	
-	[daWindow setOpaque:YES];
+	//[daWindow setOpaque:NO];
+	[daWindow setAlphaValue:0];
 	[daWindow makeKeyAndOrderFront:self];
 	
 	[anim startAnimation];
