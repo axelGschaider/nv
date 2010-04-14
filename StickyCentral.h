@@ -61,5 +61,6 @@
 - (void) stackWindowsAccordingToColor;
 - (void) stackWindowsAccordingToCreationDate;
 - (void) stackWindowsAccordingToTitle;
+- (void) stackWindowsAccordingToPosition;
 
 @end

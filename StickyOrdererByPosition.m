@@ -116,44 +116,59 @@
 	
 }
 
+/**
+ * quadrant 1 = left upper
+ * quadrant 2 = left lower
+ * quadrant 3 = right lower
+ * quadrant 4 = right upper
+ */
 - (BOOL) firstOneSmaller: (StickyObject *) first secondObject:(StickyObject *) second {
 	
-	int firstColorCode = -1;
-	int secondColorCode = -1;
+	return [self getQuadrant:first] < [self getQuadrant:second];
 	
-	StickyControler * contr = [first controler];
+}
+
+/**
+ * quadrant 1 = left upper
+ * quadrant 2 = left lower
+ * quadrant 3 = right lower
+ * quadrant 4 = right upper
+ */
+- (int) getQuadrant: (StickyObject *) sticky {
 	
-	if ([contr isBlue]) {
-		firstColorCode = 0;
-	} else if ([contr isGreen]) {
-		firstColorCode = 1;
-	} else if ([contr isGrey]) {
-		firstColorCode = 2;
-	} else if ([contr isPink]) {
-		firstColorCode = 3;
-	} else if ([contr isViolet]) {
-		firstColorCode = 4;
-	} else {
-		firstColorCode = 5;
+	NSRect frame = [[[sticky controler] window] frame];
+	
+	int frameMiddleX = frame.origin.x + (frame.size.width / 2);
+	int frameMiddleY = frame.origin.y + (frame.size.height / 2);
+	
+	NSRect screen = [[NSScreen mainScreen] visibleFrame];
+	
+	int screenMiddleX = screen.origin.x + (screen.size.width / 2);
+	int screenMiddleY = screen.origin.y + (screen.size.height / 2);
+	
+	
+	if ( frameMiddleY > screenMiddleY ) { //upper
+		
+		if (frameMiddleX < screenMiddleX) { //left upper
+			return 1;
+		}
+		else { //right upper
+			return 4;
+		}
+		
 	}
-	
-	contr = [second controler];
-	
-	if ([contr isBlue]) {
-		secondColorCode = 0;
-	} else if ([contr isGreen]) {
-		secondColorCode = 1;
-	} else if ([contr isGrey]) {
-		secondColorCode = 2;
-	} else if ([contr isPink]) {
-		secondColorCode = 3;
-	} else if ([contr isViolet]) {
-		secondColorCode = 4;
-	} else {
-		secondColorCode = 5;
+	else { // lower half
+		
+		if (frameMiddleX < screenMiddleX) { //left lower
+			return 2;
+		}
+		else { //right lower
+			return 3;
+		}
+		
 	}
+
 	
-	return (firstColorCode < secondColorCode);
 	
 }
 

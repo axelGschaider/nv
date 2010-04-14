@@ -1863,6 +1863,10 @@ terminateApp:
 	[stickyCentral stackWindowsInCurrentOrder];
 }
 
+- (IBAction)stackWindowsAccordingToPosition: (id) sender {
+	[stickyCentral stackWindowsAccordingToPosition];
+}
+
 - (IBAction)minimizeAllStickies: (id) sender {
 	[stickyCentral minimizeAll];
 }

@@ -20,5 +20,7 @@
 - (NSMutableArray *) sortTheWindows:(NSMutableArray *)theObjects;
 - (NSMutableArray *) recursiveSort: (NSMutableArray *)theObjects;
 - (BOOL) firstOneSmaller: (StickyObject *) first secondObject:(StickyObject *) second; 
+- (int) getQuadrant: (StickyObject *) sticky;
+
 
 @end

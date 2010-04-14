@@ -144,8 +144,6 @@
 - (BOOL) visibleToggle {
 	visible = !visible;
 	
-	NSLog(@"in Central");
-	
 	int count = [stickies count];
 	
 	while (count--) {
@@ -380,6 +378,14 @@
 
 - (void) stackWindowsAccordingToTitle {
 	StickyOrdererByTitle * orderer = [[StickyOrdererByTitle alloc] init];
+	
+	windows = [orderer sortTheWindows:stickies];
+	
+	[self stackWindowsInCurrentOrder];
+}
+
+- (void) stackWindowsAccordingToPosition {
+	StickyOrdererByPosition * orderer = [[StickyOrdererByPosition alloc] init];
 	
 	windows = [orderer sortTheWindows:stickies];
 	
