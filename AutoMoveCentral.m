@@ -606,7 +606,7 @@
 		if (currentLeftX + frame.size.width >= maxRightX) {
 			xStart += 30;
 			
-			if (xStart >= screen.origin.x + 100) {
+			if (xStart >= screen.origin.x + 120) {
 				xStart = screen.origin.x;
 			}
 			
@@ -672,7 +672,7 @@
 		if ( currentUpperY - frame.size.height < minY ||
 			 currentLeftX + frame.size.width > maxX) {
 			
-			xStart = xStart + 15;
+			xStart = xStart + 100;
 			currentLeftX = xStart;
 			currentUpperY = maxY;
 			

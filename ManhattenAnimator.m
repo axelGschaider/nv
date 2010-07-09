@@ -13,6 +13,9 @@
 
 - (void) registerForAnimation: (NSWindow *) aWindow withEndFrame:(NSRect) aFrame {
 	
+	float firstAnimDur = 0.5;
+	float secondAnimDur = 0.5;
+	
 	NSMutableDictionary * firstDictionary = [NSMutableDictionary dictionaryWithCapacity:3];
 	NSMutableDictionary * secondDictionary = [NSMutableDictionary dictionaryWithCapacity:3];
 	
@@ -41,8 +44,31 @@
 	NSViewAnimation * firstAnim = [[NSViewAnimation alloc] initWithViewAnimations: [NSArray arrayWithObjects:firstDictionary, nil] ];
 	NSViewAnimation * secondAnim = [[NSViewAnimation alloc] initWithViewAnimations: [NSArray arrayWithObjects:secondDictionary, nil] ];
 	
-	[firstAnim setDuration: 0.7];
-	[secondAnim setDuration: 0.3];
+	int windowX = [aWindow frame].origin.x;
+	int windowY = [aWindow frame].origin.x;
+	
+	int endX = aFrame.origin.x;
+	int endY = aFrame.origin.y;
+	
+	int xDif = windowX - endX;
+	int yDif = windowY - endY;
+	
+	if (xDif == 0) {
+		xDif = 1;
+	}
+	
+	if (yDif == 0) {
+		yDif = 0;
+	}
+	
+	double xFactor = fabs((double) xDif/[[NSScreen mainScreen] visibleFrame].size.width);
+	double yFactor = fabs((double) yDif/[[NSScreen mainScreen] visibleFrame].size.height);
+	
+	double d1 = (firstAnimDur * yFactor * 0.9) + (firstAnimDur * 0.1);
+	double d2 = (secondAnimDur * xFactor * 0.5) + (secondAnimDur * 0.5);
+	
+	[firstAnim setDuration: d1];
+	[secondAnim setDuration: d2];
 	
 	[firstAnim setAnimationCurve: NSAnimationEaseIn];
 	[secondAnim setAnimationCurve: NSAnimationEaseIn];
@@ -94,7 +120,7 @@
 	/*firstArray = [[NSMutableArray alloc] init];
 	secondArray = [[NSMutableArray alloc] init]; /* */
 	
-	hookInPoint = 0.1;
+	hookInPoint = 0.02;
 	
 	return [super init];
 }
